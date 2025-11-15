@@ -1,0 +1,24 @@
+# Copilot Instructions (Private - Local Only)
+.github/copilot-instructions.md
+
+# Build artifacts and dependencies
+node_modules/
+dist/
+build/
+*.log
+
+# IDE and editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Temporary files
+tmp/
+temp/
+*.tmp
