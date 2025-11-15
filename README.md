@@ -5,6 +5,7 @@ This is the special `.github` repository for the iSystemDevelopment organization
 ## Contents
 
 - **[COPILOT.md](COPILOT.md)** - Guidelines for GitHub Copilot and AI assistant usage
+- **[PRIVACY.md](PRIVACY.md)** - Privacy and security policy
 - **.gitignore** - Privacy controls for sensitive configuration files
 - **.github/copilot-instructions.md** - Private AI assistant instructions (local-only, not committed)
 
@@ -27,7 +28,7 @@ $ git check-ignore -v .github/copilot-instructions.md
 .gitignore:2:.github/copilot-instructions.md
 ```
 
-All public-facing documentation maintains a professional tone and protects user privacy.
+All public-facing documentation maintains a professional tone and protects user privacy. See [PRIVACY.md](PRIVACY.md) for detailed privacy policies.
 
 ## For Contributors
 
