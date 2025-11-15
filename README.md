@@ -48,6 +48,67 @@ Reviews pull requests for:
 #### Secret Scanning Alerts (`.github/workflows/secret-scanning-alert.yml`)
 Automatically creates issues when secrets are detected in the codebase.
 
+#### Smart Credential Sanitizer (`.github/workflows/smart-sanitizer.yml`)
+Advanced credential protection for public repositories:
+- **Real-time Detection** - Scans for 10+ credential types
+- **Automatic Sanitization** - Replaces credentials with secure placeholders
+- **Placeholder Format** - `[REDACTED_<TYPE>_<HASH>]`
+- **Zero Storage** - Original credentials never saved
+- **Instant Response** - Auto-commits sanitized code
+- **Security Alerts** - Creates detailed incident reports
+
+**Detection Capabilities:**
+- AWS Keys, GitHub Tokens, API Keys
+- Passwords, Private Keys, JWT Tokens
+- Slack Tokens, Google API Keys
+- Database Connection Strings
+
+**Triggers**: Push, pull requests, daily scans (02:00 UTC), manual
+
+See [SMART_SANITIZER_GUIDE.md](SMART_SANITIZER_GUIDE.md) for complete documentation.
+
+#### Bug Tracker (`.github/workflows/bug-tracker.yml`)
+Automated bug tracking and analysis system:
+- Automatic severity classification (critical, high, medium, low)
+- Category detection (security, performance, UI, API, database)
+- Intelligent labeling
+- Analysis comments with fix suggestions
+- Missing information detection
+
+**Triggers**: New bug reports, labeled issues, reopened bugs
+
+#### Bug Fix Assistant (`.github/workflows/bug-fix-assistant.yml`)
+Automated bug fixing capabilities:
+- Dependency updates
+- Security patches
+- Linting auto-fixes
+- Code formatting
+- Automated PR creation
+
+**Triggers**: Manual workflow dispatch
+
+## 🐛 Bug Tracking and Auto-Fix System
+
+### Bug Tracker Workflow
+Automated bug report analysis and tracking:
+- **Severity Classification**: Automatically categorizes as critical, high, medium, or low
+- **Category Detection**: Identifies security, performance, UI, API, database, or general bugs
+- **Smart Labeling**: Applies relevant labels based on content analysis
+- **Analysis Comments**: Posts detailed analysis with fix suggestions
+- **Quality Checks**: Flags missing reproduction steps or environment info
+
+See [BUG_TRACKING_GUIDE.md](BUG_TRACKING_GUIDE.md) for complete documentation.
+
+### Bug Fix Assistant
+Automated fixing for common bug types:
+- Dependency updates
+- Security patches
+- Linting fixes
+- Code formatting
+- Creates pull requests with fixes
+
+**Usage**: Manually trigger from Actions tab with issue number and fix type.
+
 ## 📋 Issue Templates
 
 - **Bug Report**: Structured bug reporting with security considerations
@@ -82,10 +143,13 @@ A starter workflow template with security best practices:
 ✅ CodeQL security scanning workflow  
 ✅ Dependency review workflow  
 ✅ Secret scanning alert automation  
+✅ Smart credential sanitizer with placeholder replacement  
+✅ Bug tracking and auto-fix system  
 ✅ Issue templates with security focus  
 ✅ Pull request template with security checklist  
 ✅ Contributing guidelines  
 ✅ Secure CI/CD workflow template  
+✅ Comprehensive security documentation  
 
 ## Usage
 

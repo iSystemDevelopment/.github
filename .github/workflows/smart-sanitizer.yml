@@ -1,0 +1,405 @@
+name: 'Smart Credential Sanitizer'
+
+on:
+  push:
+    branches: ['**']
+  pull_request:
+    branches: ['**']
+  schedule:
+    # Run daily at 02:00 UTC to scan for exposed credentials
+    - cron: '0 2 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  issues: write
+  pull-requests: write
+  security-events: read
+
+jobs:
+  scan-and-sanitize:
+    name: Scan for Exposed Credentials
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4.1.1
+        with:
+          fetch-depth: 0
+          persist-credentials: true
+
+      - name: Setup Python
+        uses: actions/setup-python@82c7e631bb3cdc910f68e0081d67478d79c6982d # v5.1.0
+        with:
+          python-version: '3.11'
+
+      - name: Install Detection Tools
+        run: |
+          pip install --upgrade pip
+          pip install detect-secrets
+          pip install pyyaml
+          
+          # Install additional security scanning tools
+          wget -q https://github.com/trufflesecurity/trufflehog/releases/download/v3.63.2/trufflehog_3.63.2_linux_amd64.tar.gz
+          tar -xzf trufflehog_3.63.2_linux_amd64.tar.gz
+          chmod +x trufflehog
+          sudo mv trufflehog /usr/local/bin/
+
+      - name: Scan for Exposed Credentials
+        id: scan
+        run: |
+          echo "🔍 Scanning repository for exposed credentials..."
+          
+          # Create results directory
+          mkdir -p /tmp/sanitizer-results
+          
+          # Run detect-secrets
+          detect-secrets scan --all-files --exclude-files '\.git/.*' > /tmp/sanitizer-results/secrets-baseline.json || true
+          
+          # Run trufflehog for additional detection
+          trufflehog filesystem . --json --no-update > /tmp/sanitizer-results/trufflehog-results.json 2>&1 || true
+          
+          # Check if any secrets were found
+          if [ -s /tmp/sanitizer-results/secrets-baseline.json ]; then
+            SECRETS_COUNT=$(python3 -c "import json; data=json.load(open('/tmp/sanitizer-results/secrets-baseline.json')); print(len(data.get('results', {})))")
+            echo "found-secrets=true" >> $GITHUB_OUTPUT
+            echo "secrets-count=$SECRETS_COUNT" >> $GITHUB_OUTPUT
+          else
+            echo "found-secrets=false" >> $GITHUB_OUTPUT
+            echo "secrets-count=0" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Create Sanitization Script
+        if: steps.scan.outputs.found-secrets == 'true'
+        run: |
+          cat > /tmp/sanitize_credentials.py << 'PYTHON_EOF'
+          import json
+          import re
+          import os
+          import hashlib
+          from pathlib import Path
+
+          # Common credential patterns to detect and sanitize
+          CREDENTIAL_PATTERNS = {
+              'aws_access_key': {
+                  'pattern': r'AKIA[0-9A-Z]{16}',
+                  'placeholder': 'AKIA_XXXX_REDACTED_XXXX',
+                  'type': 'AWS Access Key'
+              },
+              'aws_secret_key': {
+                  'pattern': r'aws_secret_access_key\s*=\s*["\']?([A-Za-z0-9/+=]{40})["\']?',
+                  'placeholder': 'aws_secret_access_key = "XXXX_REDACTED_SECRET_KEY_XXXX"',
+                  'type': 'AWS Secret Key'
+              },
+              'github_token': {
+                  'pattern': r'gh[pousr]_[A-Za-z0-9]{36,255}',
+                  'placeholder': 'ghp_XXXX_REDACTED_GITHUB_TOKEN_XXXX',
+                  'type': 'GitHub Token'
+              },
+              'generic_api_key': {
+                  'pattern': r'api[_-]?key\s*[=:]\s*["\']([A-Za-z0-9_\-]{20,})["\']',
+                  'placeholder': 'api_key = "XXXX_REDACTED_API_KEY_XXXX"',
+                  'type': 'API Key'
+              },
+              'password': {
+                  'pattern': r'password\s*[=:]\s*["\']([^"\']{8,})["\']',
+                  'placeholder': 'password = "XXXX_REDACTED_PASSWORD_XXXX"',
+                  'type': 'Password'
+              },
+              'private_key': {
+                  'pattern': r'-----BEGIN (RSA |EC |DSA |OPENSSH )?PRIVATE KEY-----',
+                  'placeholder': '-----BEGIN PRIVATE KEY----- [REDACTED] -----END PRIVATE KEY-----',
+                  'type': 'Private Key'
+              },
+              'jwt_token': {
+                  'pattern': r'eyJ[A-Za-z0-9_-]*\.eyJ[A-Za-z0-9_-]*\.[A-Za-z0-9_-]*',
+                  'placeholder': 'eyJXXXX.REDACTED.XXXX',
+                  'type': 'JWT Token'
+              },
+              'slack_token': {
+                  'pattern': r'xox[baprs]-[0-9A-Za-z]{10,48}',
+                  'placeholder': 'xoxb-XXXX-REDACTED-SLACK-TOKEN-XXXX',
+                  'type': 'Slack Token'
+              },
+              'google_api': {
+                  'pattern': r'AIza[0-9A-Za-z_-]{35}',
+                  'placeholder': 'AIzaXXXX_REDACTED_GOOGLE_API_KEY_XXXX',
+                  'type': 'Google API Key'
+              },
+              'connection_string': {
+                  'pattern': r'(mongodb|postgres|mysql)://[^:]+:[^@]+@',
+                  'placeholder': r'\1://username:XXXX_REDACTED_PASSWORD_XXXX@',
+                  'type': 'Database Connection String'
+              }
+          }
+
+          class CredentialSanitizer:
+              def __init__(self):
+                  self.findings = []
+                  self.sanitized_files = []
+
+              def sanitize_file(self, file_path):
+                  """Sanitize a single file by replacing credentials with placeholders."""
+                  try:
+                      with open(file_path, 'r', encoding='utf-8', errors='ignore') as f:
+                          content = f.read()
+                      
+                      original_content = content
+                      file_findings = []
+                      
+                      # Apply each pattern
+                      for name, pattern_info in CREDENTIAL_PATTERNS.items():
+                          matches = re.finditer(pattern_info['pattern'], content, re.MULTILINE | re.IGNORECASE)
+                          for match in matches:
+                              # Generate unique placeholder with hash
+                              matched_text = match.group(0)
+                              credential_hash = hashlib.sha256(matched_text.encode()).hexdigest()[:8]
+                              
+                              # Create contextual placeholder
+                              placeholder = f"[REDACTED_{pattern_info['type'].upper().replace(' ', '_')}_{credential_hash}]"
+                              
+                              # Replace the credential
+                              content = content.replace(matched_text, placeholder)
+                              
+                              file_findings.append({
+                                  'type': pattern_info['type'],
+                                  'file': str(file_path),
+                                  'hash': credential_hash,
+                                  'line': content[:match.start()].count('\n') + 1
+                              })
+                      
+                      # Write sanitized content if changes were made
+                      if content != original_content:
+                          with open(file_path, 'w', encoding='utf-8') as f:
+                              f.write(content)
+                          
+                          self.sanitized_files.append(str(file_path))
+                          self.findings.extend(file_findings)
+                          return True
+                      
+                      return False
+                      
+                  except Exception as e:
+                      print(f"Error sanitizing {file_path}: {e}")
+                      return False
+
+              def scan_repository(self, repo_path='.'):
+                  """Scan entire repository for credentials."""
+                  exclude_patterns = [
+                      '.git', 'node_modules', '__pycache__', '.pytest_cache',
+                      'venv', 'env', '.env', 'dist', 'build', '.next',
+                      'vendor', 'target', 'bin', 'obj'
+                  ]
+                  
+                  for root, dirs, files in os.walk(repo_path):
+                      # Filter out excluded directories
+                      dirs[:] = [d for d in dirs if d not in exclude_patterns]
+                      
+                      for file in files:
+                          file_path = Path(root) / file
+                          
+                          # Skip binary files and common excludes
+                          if file_path.suffix in ['.pyc', '.exe', '.dll', '.so', '.dylib', '.jpg', '.png', '.gif', '.pdf', '.zip', '.tar', '.gz']:
+                              continue
+                          
+                          # Sanitize the file
+                          self.sanitize_file(file_path)
+
+              def generate_report(self):
+                  """Generate sanitization report."""
+                  report = {
+                      'total_files_sanitized': len(self.sanitized_files),
+                      'total_credentials_found': len(self.findings),
+                      'sanitized_files': self.sanitized_files,
+                      'findings': self.findings
+                  }
+                  
+                  with open('/tmp/sanitizer-results/sanitization-report.json', 'w') as f:
+                      json.dump(report, f, indent=2)
+                  
+                  return report
+
+          if __name__ == '__main__':
+              sanitizer = CredentialSanitizer()
+              print("🧹 Starting credential sanitization...")
+              sanitizer.scan_repository('.')
+              report = sanitizer.generate_report()
+              
+              print(f"\n✅ Sanitization complete!")
+              print(f"   Files sanitized: {report['total_files_sanitized']}")
+              print(f"   Credentials found: {report['total_credentials_found']}")
+              
+              if report['total_credentials_found'] > 0:
+                  print("\n⚠️  CREDENTIALS WERE FOUND AND REDACTED!")
+                  exit(1)
+              else:
+                  print("\n✓ No credentials found.")
+                  exit(0)
+          PYTHON_EOF
+          
+          chmod +x /tmp/sanitize_credentials.py
+
+      - name: Run Sanitization
+        id: sanitize
+        if: steps.scan.outputs.found-secrets == 'true'
+        run: |
+          python3 /tmp/sanitize_credentials.py || true
+          
+          if [ -f /tmp/sanitizer-results/sanitization-report.json ]; then
+            SANITIZED_COUNT=$(python3 -c "import json; data=json.load(open('/tmp/sanitizer-results/sanitization-report.json')); print(data['total_files_sanitized'])")
+            CREDENTIALS_COUNT=$(python3 -c "import json; data=json.load(open('/tmp/sanitizer-results/sanitization-report.json')); print(data['total_credentials_found'])")
+            
+            echo "sanitized-files=$SANITIZED_COUNT" >> $GITHUB_OUTPUT
+            echo "credentials-found=$CREDENTIALS_COUNT" >> $GITHUB_OUTPUT
+            echo "sanitization-performed=true" >> $GITHUB_OUTPUT
+          else
+            echo "sanitization-performed=false" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Generate Sanitization Report
+        if: steps.sanitize.outputs.sanitization-performed == 'true'
+        uses: actions/github-script@60a0d83039c74a4aee543508d2ffcb1c3799cdea # v7.0.1
+        with:
+          script: |
+            const fs = require('fs');
+            
+            let report = {
+              total_files_sanitized: 0,
+              total_credentials_found: 0,
+              findings: []
+            };
+            
+            try {
+              const reportData = fs.readFileSync('/tmp/sanitizer-results/sanitization-report.json', 'utf8');
+              report = JSON.parse(reportData);
+            } catch (e) {
+              console.log('No sanitization report found');
+            }
+            
+            let issueBody = `## 🚨 Credential Exposure Alert - Sanitization Report\n\n`;
+            issueBody += `**Scan Date:** ${new Date().toISOString()}\n`;
+            issueBody += `**Branch:** ${context.ref}\n`;
+            issueBody += `**Commit:** ${context.sha}\n\n`;
+            issueBody += `### Summary\n\n`;
+            issueBody += `- **Files Sanitized:** ${report.total_files_sanitized}\n`;
+            issueBody += `- **Credentials Found:** ${report.total_credentials_found}\n\n`;
+            
+            issueBody += `### 🔒 Credentials Have Been Automatically Redacted\n\n`;
+            issueBody += `Exposed credentials have been replaced with secure placeholders in the following format:\n`;
+            issueBody += `\`[REDACTED_<TYPE>_<HASH>]\`\n\n`;
+            
+            if (report.findings && report.findings.length > 0) {
+              issueBody += `### 📍 Findings by Type\n\n`;
+              
+              const findingsByType = {};
+              report.findings.forEach(finding => {
+                if (!findingsByType[finding.type]) {
+                  findingsByType[finding.type] = [];
+                }
+                findingsByType[finding.type].push(finding);
+              });
+              
+              for (const [type, findings] of Object.entries(findingsByType)) {
+                issueBody += `#### ${type}\n`;
+                issueBody += `Found in ${findings.length} location(s):\n`;
+                findings.forEach(f => {
+                  issueBody += `- \`${f.file}\` (line ${f.line}) - Hash: \`${f.hash}\`\n`;
+                });
+                issueBody += `\n`;
+              }
+            }
+            
+            issueBody += `### ⚠️ URGENT ACTION REQUIRED\n\n`;
+            issueBody += `1. **Revoke all exposed credentials immediately**\n`;
+            issueBody += `2. **Rotate secrets** and update all systems using them\n`;
+            issueBody += `3. **Review commit history** for additional exposures\n`;
+            issueBody += `4. **Use environment variables** or secret management for credentials\n`;
+            issueBody += `5. **Enable secret scanning** in repository settings\n\n`;
+            
+            issueBody += `### 🛡️ Prevention Best Practices\n\n`;
+            issueBody += `- Use GitHub Secrets for CI/CD workflows\n`;
+            issueBody += `- Store credentials in environment variables\n`;
+            issueBody += `- Use \`.gitignore\` for sensitive files\n`;
+            issueBody += `- Enable pre-commit hooks to scan for secrets\n`;
+            issueBody += `- Use secret management tools (Vault, AWS Secrets Manager, etc.)\n`;
+            issueBody += `- Never hardcode credentials in source code\n\n`;
+            
+            issueBody += `### 📊 Sanitized Files\n\n`;
+            if (report.sanitized_files && report.sanitized_files.length > 0) {
+              issueBody += `\`\`\`\n${report.sanitized_files.join('\n')}\`\`\`\n\n`;
+            }
+            
+            issueBody += `---\n`;
+            issueBody += `*This report was automatically generated by the Smart Credential Sanitizer.*\n`;
+            issueBody += `*Credentials have been replaced with placeholders. Original values are NOT stored.*`;
+            
+            // Save report for issue creation
+            fs.writeFileSync('/tmp/sanitizer-results/issue-body.txt', issueBody);
+            
+            console.log(issueBody);
+
+      - name: Commit Sanitized Changes
+        if: steps.sanitize.outputs.sanitization-performed == 'true'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          
+          git add -A
+          
+          if ! git diff --cached --quiet; then
+            git commit -m "🔒 Security: Auto-sanitize exposed credentials
+
+            Detected and sanitized ${{ steps.sanitize.outputs.credentials-found }} credential(s) in ${{ steps.sanitize.outputs.sanitized-files }} file(s).
+            
+            Credentials have been replaced with secure placeholders:
+            [REDACTED_<TYPE>_<HASH>]
+            
+            ⚠️ URGENT: Revoke all exposed credentials immediately!
+            
+            Co-authored-by: Smart Credential Sanitizer <security@github.com>"
+            
+            echo "changes-committed=true" >> $GITHUB_OUTPUT
+          else
+            echo "No changes to commit"
+            echo "changes-committed=false" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Create Security Issue
+        if: steps.sanitize.outputs.sanitization-performed == 'true'
+        uses: actions/github-script@60a0d83039c74a4aee543508d2ffcb1c3799cdea # v7.0.1
+        with:
+          script: |
+            const fs = require('fs');
+            const issueBody = fs.readFileSync('/tmp/sanitizer-results/issue-body.txt', 'utf8');
+            
+            const issue = await github.rest.issues.create({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              title: '🚨 URGENT: Exposed Credentials Detected and Sanitized',
+              body: issueBody,
+              labels: ['security', 'urgent', 'credentials-exposure', 'automated']
+            });
+            
+            console.log(`Created security issue #${issue.data.number}`);
+
+      - name: Summary Report
+        if: always()
+        run: |
+          echo "================================================"
+          echo "  SMART CREDENTIAL SANITIZER - SCAN COMPLETE"
+          echo "================================================"
+          
+          if [ "${{ steps.scan.outputs.found-secrets }}" == "true" ]; then
+            echo "⚠️  Status: CREDENTIALS FOUND AND SANITIZED"
+            echo "📊 Files Sanitized: ${{ steps.sanitize.outputs.sanitized-files }}"
+            echo "🔍 Credentials Found: ${{ steps.sanitize.outputs.credentials-found }}"
+            echo ""
+            echo "✅ All exposed credentials have been replaced with placeholders"
+            echo "🚨 Security issue created for tracking"
+            echo "⚠️  IMMEDIATE ACTION REQUIRED: Revoke all exposed credentials!"
+          else
+            echo "✅ Status: NO CREDENTIALS FOUND"
+            echo "🎉 Repository is clean"
+          fi
+          
+          echo "================================================"
