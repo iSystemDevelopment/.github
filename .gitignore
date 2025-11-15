@@ -1,0 +1,28 @@
+# Sensitive AI instructions - not for public viewing
+.github/copilot-instructions.md
+
+# Temporary files
+*.tmp
+*.temp
+.DS_Store
+
+# IDE and editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Environment files
+.env
+.env.local
+.env.*.local
+
+# Build artifacts
+dist/
+build/
+node_modules/
+
+# Logs
+*.log
+logs/
