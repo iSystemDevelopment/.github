@@ -1,0 +1,18 @@
+# Code Owners
+# These owners will be the default reviewers for everything in the repo.
+# Unless a later match takes precedence, they will be requested for review when someone opens a pull request.
+
+# Global owners for all files
+* @iSystemDevelopment/maintainers
+
+# Documentation owners
+*.md @iSystemDevelopment/docs-team
+
+# Configuration files
+*.yml @iSystemDevelopment/devops-team
+*.yaml @iSystemDevelopment/devops-team
+*.json @iSystemDevelopment/devops-team
+
+# Security-related files
+SECURITY.md @iSystemDevelopment/security-team
+.github/workflows/* @iSystemDevelopment/devops-team

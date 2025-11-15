@@ -1,0 +1,32 @@
+# Prevent exposing unpolished prompts and agent configurations
+.github/agents/
+*.prompt
+*.agent
+**/prompts/
+**/drafts/
+
+# Build artifacts
+dist/
+build/
+*.log
+*.tmp
+
+# Dependencies
+node_modules/
+vendor/
+.env
+.env.local
+
+# IDE and editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Temporary files
+tmp/
+temp/
+*.bak
+*.orig
