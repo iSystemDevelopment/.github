@@ -109,6 +109,36 @@ Automated fixing for common bug types:
 
 **Usage**: Manually trigger from Actions tab with issue number and fix type.
 
+## 👁️ Activity Tracking and Advisory System
+
+### Activity Tracker Workflow
+Intelligent monitoring and guidance system:
+- **Real-time Monitoring** - Tracks all repository activities
+- **Issue Detection** - Identifies potential problems and wrongdoings
+- **Automatic Advisory** - Posts helpful recommendations
+- **Solution Proposals** - Provides specific fixes for detected issues
+- **Educational Guidance** - Teaches best practices in real-time
+
+**Detected Issues:**
+- Force pushes to shared branches
+- Poor or incomplete commit messages
+- Sensitive information in commit messages
+- Oversized pull requests (>500 lines)
+- Direct commits to main/master branches
+- Work-in-progress commits to production
+- Branch deletions (especially protected branches)
+- Missing PR descriptions
+
+**Advisory Levels:**
+- 🚨 **Critical** - Creates tracking issue (e.g., main branch deletion, credentials in messages)
+- ⚠️ **High** - Posts advisory comment (e.g., force push, security references)
+- ⚡ **Medium** - Provides guidance (e.g., large PR, WIP commits)
+- ℹ️ **Low** - Educational tips (e.g., poor commit messages)
+
+**Triggers**: All repository events (push, PR, issues, branch operations, comments)
+
+See [ACTIVITY_TRACKER_GUIDE.md](ACTIVITY_TRACKER_GUIDE.md) for complete documentation.
+
 ## 📋 Issue Templates
 
 - **Bug Report**: Structured bug reporting with security considerations
@@ -145,11 +175,32 @@ A starter workflow template with security best practices:
 ✅ Secret scanning alert automation  
 ✅ Smart credential sanitizer with placeholder replacement  
 ✅ Bug tracking and auto-fix system  
+✅ Activity tracker and advisory system  
 ✅ Issue templates with security focus  
 ✅ Pull request template with security checklist  
 ✅ Contributing guidelines  
 ✅ Secure CI/CD workflow template  
 ✅ Comprehensive security documentation  
+
+## Key Features Summary
+
+**Security Automation:**
+- Real-time credential detection and sanitization
+- Automated vulnerability scanning (CodeQL, Dependabot)
+- Secret scanning with instant alerts
+- License compliance checking
+
+**Quality Assurance:**
+- Activity monitoring with helpful guidance
+- Automated bug categorization and tracking
+- Auto-fix capabilities for common issues
+- Large PR detection and recommendations
+
+**Developer Experience:**
+- Immediate feedback on potential issues
+- Solution proposals for detected problems
+- Educational guidance on best practices
+- Comprehensive documentation  
 
 ## Usage
 
