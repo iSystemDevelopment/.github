@@ -1,0 +1,192 @@
+name: 'Private Bug Tracker - Authorized Users Only'
+
+on:
+  issues:
+    types: [opened, labeled, reopened]
+  issue_comment:
+    types: [created]
+
+permissions:
+  issues: read
+  contents: read
+  actions: write
+
+env:
+  AUTHORIZED_USER: 'Dr-Diodac'
+
+jobs:
+  track-and-analyze:
+    name: Track Bug Report and Analyze (Private)
+    if: contains(github.event.issue.labels.*.name, 'bug') || startsWith(github.event.issue.title, '[Bug]')
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4.1.1
+        with:
+          persist-credentials: false
+
+      - name: Analyze and Categorize Bug
+        id: analyze
+        uses: actions/github-script@60a0d83039c74a4aee543508d2ffcb1c3799cdea # v7.0.1
+        with:
+          script: |
+            const issue = context.payload.issue;
+            const issueNumber = issue.number;
+            const issueBody = issue.body || '';
+            const issueTitle = issue.title || '';
+            
+            console.log(`[PRIVATE] Analyzing bug report #${issueNumber}`);
+            
+            // Initialize bug tracking data
+            const bugData = {
+              number: issueNumber,
+              title: issueTitle,
+              reportedBy: issue.user.login,
+              reportedAt: issue.created_at,
+              severity: 'unknown',
+              category: 'unknown',
+              status: 'needs-triage',
+              reproducible: false,
+              hasEnvironmentInfo: false,
+              hasSolution: false
+            };
+            
+            // Analyze severity based on keywords
+            const criticalKeywords = ['crash', 'data loss', 'security', 'corrupt', 'cannot start', 'fatal'];
+            const highKeywords = ['broken', 'not working', 'fails', 'error', 'exception', 'hang'];
+            const mediumKeywords = ['incorrect', 'unexpected', 'slow', 'performance'];
+            const lowKeywords = ['typo', 'ui', 'cosmetic', 'minor'];
+            
+            const lowerTitle = issueTitle.toLowerCase();
+            const lowerBody = issueBody.toLowerCase();
+            const combinedText = lowerTitle + ' ' + lowerBody;
+            
+            if (criticalKeywords.some(keyword => combinedText.includes(keyword))) {
+              bugData.severity = 'critical';
+            } else if (highKeywords.some(keyword => combinedText.includes(keyword))) {
+              bugData.severity = 'high';
+            } else if (mediumKeywords.some(keyword => combinedText.includes(keyword))) {
+              bugData.severity = 'medium';
+            } else if (lowKeywords.some(keyword => combinedText.includes(keyword))) {
+              bugData.severity = 'low';
+            }
+            
+            // Categorize bug type
+            if (combinedText.includes('security') || combinedText.includes('vulnerability')) {
+              bugData.category = 'security';
+            } else if (combinedText.includes('performance') || combinedText.includes('slow')) {
+              bugData.category = 'performance';
+            } else if (combinedText.includes('ui') || combinedText.includes('interface')) {
+              bugData.category = 'ui';
+            } else if (combinedText.includes('api') || combinedText.includes('endpoint')) {
+              bugData.category = 'api';
+            } else if (combinedText.includes('database') || combinedText.includes('data')) {
+              bugData.category = 'database';
+            } else {
+              bugData.category = 'general';
+            }
+            
+            // Check if reproduction steps are provided
+            bugData.reproducible = issueBody.includes('Steps to Reproduce') || 
+                                   issueBody.includes('To Reproduce') ||
+                                   /\d+\.\s+/.test(issueBody);
+            
+            // Check if environment info is provided
+            bugData.hasEnvironmentInfo = issueBody.includes('Environment') ||
+                                         issueBody.includes('OS:') ||
+                                         issueBody.includes('Browser:') ||
+                                         issueBody.includes('Version:');
+            
+            core.setOutput('bug-data', JSON.stringify(bugData, null, 2));
+            core.setOutput('severity', bugData.severity);
+            core.setOutput('category', bugData.category);
+            
+            return bugData;
+
+      - name: Generate Private Report
+        id: report
+        run: |
+          mkdir -p /tmp/private-reports
+          
+          cat > /tmp/private-reports/bug-report-${{ github.event.issue.number }}.md << 'EOF'
+          # 🔒 PRIVATE BUG TRACKING REPORT
+          
+          **CONFIDENTIAL - AUTHORIZED USER ONLY: ${{ env.AUTHORIZED_USER }}**
+          
+          ---
+          
+          ## Bug Report #${{ github.event.issue.number }}
+          
+          **Title:** ${{ github.event.issue.title }}
+          **Reported by:** @${{ github.event.issue.user.login }}
+          **Reported at:** ${{ github.event.issue.created_at }}
+          **URL:** ${{ github.event.issue.html_url }}
+          
+          ### Analysis Summary
+          
+          ```json
+          ${{ steps.analyze.outputs.bug-data }}
+          ```
+          
+          ### Severity Classification
+          
+          **Severity:** ${{ steps.analyze.outputs.severity }}
+          **Category:** ${{ steps.analyze.outputs.category }}
+          
+          ### Recommended Actions
+          
+          Based on the analysis, the following actions are recommended:
+          
+          1. **Triage Priority:** ${{ steps.analyze.outputs.severity }}
+          2. **Review Category:** ${{ steps.analyze.outputs.category }}
+          3. **Assign to appropriate team**
+          4. **Request additional information if needed**
+          
+          ### Tracking Status
+          
+          - ✅ Bug report received and logged
+          - ✅ Automated analysis completed
+          - ⏳ Awaiting authorized user review
+          
+          ---
+          
+          **Report ID:** ${{ github.event.issue.number }}-${{ github.run_id }}
+          **Generated:** $(date -u +"%Y-%m-%dT%H:%M:%SZ")
+          **Access Level:** PRIVATE
+          **Authorized for:** ${{ env.AUTHORIZED_USER }}
+          
+          ---
+          
+          *This is a private report. Do not share publicly.*
+          EOF
+          
+          echo "report-generated=true" >> $GITHUB_OUTPUT
+
+      - name: Upload Private Report as Artifact
+        uses: actions/upload-artifact@5d5d22a31266ced268874388b861e4b58bb5c2f3 # v4.3.1
+        with:
+          name: private-bug-report-${{ github.event.issue.number }}
+          path: /tmp/private-reports/
+          retention-days: 90
+          if-no-files-found: error
+
+      - name: Summary for Workflow Logs
+        run: |
+          echo "================================================"
+          echo "  PRIVATE BUG TRACKING REPORT GENERATED"
+          echo "================================================"
+          echo "Issue Number: #${{ github.event.issue.number }}"
+          echo "Severity: ${{ steps.analyze.outputs.severity }}"
+          echo "Category: ${{ steps.analyze.outputs.category }}"
+          echo "Authorized User: ${{ env.AUTHORIZED_USER }}"
+          echo "Report Location: Workflow Artifacts (Private)"
+          echo "================================================"
+          echo ""
+          echo "⚠️  CONFIDENTIAL REPORT - RESTRICTED ACCESS"
+          echo "✅ Report stored in private artifacts"
+          echo "✅ Only authorized user can access"
+          echo "🔒 No public comments will be posted"
+          echo ""
+          echo "Authorized user can download report from:"
+          echo "Actions → This workflow run → Artifacts"

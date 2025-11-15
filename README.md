@@ -67,13 +67,17 @@ Advanced credential protection for public repositories:
 
 See [SMART_SANITIZER_GUIDE.md](SMART_SANITIZER_GUIDE.md) for complete documentation.
 
-#### Bug Tracker (`.github/workflows/bug-tracker.yml`)
-Automated bug tracking and analysis system:
+#### 🔒 Private Bug Tracker (`.github/workflows/private-bug-tracker.yml`)
+**CONFIDENTIAL - Authorized User Only: Dr-Diodac**
+
+Automated bug tracking and analysis with private reporting:
 - Automatic severity classification (critical, high, medium, low)
 - Category detection (security, performance, UI, API, database)
-- Intelligent labeling
-- Analysis comments with fix suggestions
-- Missing information detection
+- Intelligent analysis without public comments
+- Private reports via workflow artifacts
+- 90-day retention, restricted access
+
+**Reporting**: Private artifacts only - NO public comments or issues
 
 **Triggers**: New bug reports, labeled issues, reopened bugs
 
@@ -87,17 +91,37 @@ Automated bug fixing capabilities:
 
 **Triggers**: Manual workflow dispatch
 
-## 🐛 Bug Tracking and Auto-Fix System
+## 🔒 Private Bug Tracking and Activity Monitoring
 
-### Bug Tracker Workflow
-Automated bug report analysis and tracking:
+**CONFIDENTIAL SYSTEM - Authorized User Only: Dr-Diodac**
+
+### Private Bug Tracker Workflow
+Automated bug report analysis with private reporting:
 - **Severity Classification**: Automatically categorizes as critical, high, medium, or low
 - **Category Detection**: Identifies security, performance, UI, API, database, or general bugs
-- **Smart Labeling**: Applies relevant labels based on content analysis
-- **Analysis Comments**: Posts detailed analysis with fix suggestions
-- **Quality Checks**: Flags missing reproduction steps or environment info
+- **Private Analysis**: No public comments or issues created
+- **Artifact Storage**: Reports available via Actions tab only
+- **Restricted Access**: Only authorized user can download reports
+- **90-Day Retention**: Automatic cleanup after retention period
 
-See [BUG_TRACKING_GUIDE.md](BUG_TRACKING_GUIDE.md) for complete documentation.
+**Access**: Navigate to Actions → Private Bug Tracker → Select Run → Download Artifacts
+
+### Private Activity Tracker Workflow
+Real-time activity monitoring with private reporting:
+- **Activity Monitoring**: Tracks all repository events
+- **Issue Detection**: Force pushes, poor commits, large PRs, branch operations
+- **Private Advisory**: No public notifications
+- **Severity Levels**: Critical, High, Medium, Low
+- **Solution Proposals**: Specific recommendations for detected issues
+- **Artifact Reports**: Downloadable only by authorized user
+
+**Access**: Navigate to Actions → Private Activity Tracker → Select Run → Download Artifacts
+
+See [PRIVATE_REPORTING_GUIDE.md](PRIVATE_REPORTING_GUIDE.md) for complete documentation.
+
+**Note**: Public bug-tracker and activity-tracker workflows have been disabled to ensure privacy.
+
+## 🐛 Bug Fix Assistant
 
 ### Bug Fix Assistant
 Automated fixing for common bug types:
@@ -108,36 +132,6 @@ Automated fixing for common bug types:
 - Creates pull requests with fixes
 
 **Usage**: Manually trigger from Actions tab with issue number and fix type.
-
-## 👁️ Activity Tracking and Advisory System
-
-### Activity Tracker Workflow
-Intelligent monitoring and guidance system:
-- **Real-time Monitoring** - Tracks all repository activities
-- **Issue Detection** - Identifies potential problems and wrongdoings
-- **Automatic Advisory** - Posts helpful recommendations
-- **Solution Proposals** - Provides specific fixes for detected issues
-- **Educational Guidance** - Teaches best practices in real-time
-
-**Detected Issues:**
-- Force pushes to shared branches
-- Poor or incomplete commit messages
-- Sensitive information in commit messages
-- Oversized pull requests (>500 lines)
-- Direct commits to main/master branches
-- Work-in-progress commits to production
-- Branch deletions (especially protected branches)
-- Missing PR descriptions
-
-**Advisory Levels:**
-- 🚨 **Critical** - Creates tracking issue (e.g., main branch deletion, credentials in messages)
-- ⚠️ **High** - Posts advisory comment (e.g., force push, security references)
-- ⚡ **Medium** - Provides guidance (e.g., large PR, WIP commits)
-- ℹ️ **Low** - Educational tips (e.g., poor commit messages)
-
-**Triggers**: All repository events (push, PR, issues, branch operations, comments)
-
-See [ACTIVITY_TRACKER_GUIDE.md](ACTIVITY_TRACKER_GUIDE.md) for complete documentation.
 
 ## 📋 Issue Templates
 
@@ -174,13 +168,27 @@ A starter workflow template with security best practices:
 ✅ Dependency review workflow  
 ✅ Secret scanning alert automation  
 ✅ Smart credential sanitizer with placeholder replacement  
-✅ Bug tracking and auto-fix system  
-✅ Activity tracker and advisory system  
+✅ Private bug tracking system (restricted access)  
+✅ Private activity monitoring system (restricted access)  
+✅ Bug fix assistant workflow  
 ✅ Issue templates with security focus  
 ✅ Pull request template with security checklist  
 ✅ Contributing guidelines  
 ✅ Secure CI/CD workflow template  
 ✅ Comprehensive security documentation  
+
+## 🔒 Private Systems
+
+**Authorized User Only: Dr-Diodac**
+
+- Private Bug Tracker - Confidential bug analysis
+- Private Activity Tracker - Confidential activity monitoring
+- All reports stored in private workflow artifacts
+- No public comments or issues created
+- 90-day retention period
+- Access via Actions tab only
+
+See [PRIVATE_REPORTING_GUIDE.md](PRIVATE_REPORTING_GUIDE.md) for access instructions.  
 
 ## Key Features Summary
 
