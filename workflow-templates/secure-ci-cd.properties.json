@@ -1,0 +1,6 @@
+{
+    "name": "Secure CI/CD Workflow",
+    "description": "A secure CI/CD workflow template with security best practices",
+    "iconName": "shield-lock",
+    "categories": ["automation", "security"]
+}
