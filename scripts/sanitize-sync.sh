@@ -12,7 +12,9 @@ rm -rf "$OUTPUT_DIR"
 mkdir -p "$OUTPUT_DIR"
 
 # 1. Copy everything except git and output dir
-rsync -a . "$OUTPUT_DIR"   --exclude ".git"   --exclude "$OUTPUT_DIR"
+rsync -a . "$OUTPUT_DIR" \
+  --exclude ".git" \
+  --exclude "$OUTPUT_DIR"
 
 cd "$OUTPUT_DIR"
 
@@ -20,10 +22,21 @@ cd "$OUTPUT_DIR"
 rm -rf internal private notes ai-context chat-history prompt-history || true
 
 # 3. Remove sensitive files
-find . -type f \(   -name ".env" -o   -name ".env.*" -o   -name "*.pem" -o   -name "*.key" -o   -name "*.crt" \) -print -delete || true
+find . -type f \( \
+  -name ".env" -o \
+  -name ".env.*" -o \
+  -name "*.pem" -o \
+  -name "*.key" -o \
+  -name "*.crt" \
+\) -print -delete || true
 
 # 4. Strip lines containing sensitive markers and sanitize simple secrets
-find . -type f \(   -name "*.js" -o -name "*.ts" -o -name "*.jsx" -o -name "*.tsx" -o   -name "*.json" -o -name "*.md"  -o -name "*.txt"  -o   -name "*.yml"  -o -name "*.yaml" -o -name "*.env" -o   -name "*.css" -o -name "*.html" \) | while read -r file; do
+find . -type f \( \
+  -name "*.js" -o -name "*.ts" -o -name "*.jsx" -o -name "*.tsx" -o \
+  -name "*.json" -o -name "*.md"  -o -name "*.txt"  -o \
+  -name "*.yml"  -o -name "*.yaml" -o -name "*.env" -o \
+  -name "*.css" -o -name "*.html" \
+\) | while read -r file; do
   # Remove lines containing internal markers
   sed -i '/AI:/d' "$file"
   sed -i '/INTERNAL:/d' "$file"
