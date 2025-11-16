@@ -1,0 +1,96 @@
+name: Sanitize and Sync to Public
+
+on:
+  push:
+    branches: ["main"]
+  workflow_dispatch:
+
+jobs:
+  sanitize-and-sync:
+    runs-on: ubuntu-latest
+
+    env:
+      # CHANGE THIS PER PROJECT:
+      PUBLIC_OWNER: iSystemDevelopment
+      PUBLIC_REPO: smart-inventory-builder      # e.g. without "-private"
+      EXPORT_DIR: public-export
+
+    steps:
+      - name: Checkout private repo
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Ensure scripts are executable
+        run: |
+          if [ -f scripts/sanitize-sync.sh ]; then
+            chmod +x scripts/sanitize-sync.sh
+          fi
+
+      - name: Run sanitizer script
+        run: |
+          if [ -f scripts/sanitize-sync.sh ]; then
+            echo "Running scripts/sanitize-sync.sh ${EXPORT_DIR}"
+            ./scripts/sanitize-sync.sh "${EXPORT_DIR}"
+          else
+            echo "::error::Sanitizer script scripts/sanitize-sync.sh not found."
+            exit 1
+          fi
+
+      - name: Validate sanitized output
+        working-directory: ${{ env.EXPORT_DIR }}
+        run: |
+          echo "Validating sanitized output in $(pwd)"
+
+          # Check for leftover private markers
+          MATCHES=$(grep -RInE "AI:|INTERNAL:|CONFIDENTIAL|PRIVATE PROMPT|prompt-history|# SANITIZE|// SANITIZE" . || true)
+          if [ -n "$MATCHES" ]; then
+            echo "::error::Sanitized output still contains internal markers or SANITIZE tags:"
+            echo "$MATCHES"
+            exit 1
+          fi
+
+          # Check for secret-like files
+          SECRET_FILES=$(find . -type f \( \
+            -name ".env" -o \
+            -name ".env.*" -o \
+            -name "*.pem" -o \
+            -name "*.key" -o \
+            -name "*.crt" \
+          \) | sed 's|^\./||' || true)
+
+          if [ -n "$SECRET_FILES" ]; then
+            echo "::error::Sanitized output still contains secret-like files:"
+            echo "$SECRET_FILES"
+            exit 1
+          fi
+
+          echo "Sanitized output appears safe."
+
+      - name: Push to public repo
+        env:
+          API_TOKEN_GITHUB: ${{ secrets.PUBLIC_REPO_PAT }}
+        run: |
+          if [ -z "${API_TOKEN_GITHUB}" ]; then
+            echo "::error::PUBLIC_REPO_PAT secret is not configured."
+            exit 1
+          fi
+
+          echo "Cloning public repo ${PUBLIC_OWNER}/${PUBLIC_REPO}..."
+          git clone "https://x-access-token:${API_TOKEN_GITHUB}@github.com/${PUBLIC_OWNER}/${PUBLIC_REPO}.git" public-repo
+
+          echo "Syncing sanitized export into public repo..."
+          rsync -av --delete "${EXPORT_DIR}/" "public-repo/"
+
+          cd public-repo
+
+          git config user.email "sync-bot@isystem.dev"
+          git config user.name "SSOT Sync Bot"
+
+          git add .
+          if git diff --cached --quiet; then
+            echo "No changes to commit."
+          else
+            git commit -m "Automated sanitized sync from private repo [ci skip]"
+            git push origin main
+          fi
