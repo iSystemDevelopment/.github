@@ -5,7 +5,7 @@
 We take security seriously. If you discover a security vulnerability, please follow these steps:
 
 1. **Do not** open a public issue
-2. Email the security team with details of the vulnerability
+2. Email the security team at [security@isystemdevelopment.com](mailto:security@isystemdevelopment.com) with details of the vulnerability
 3. Include steps to reproduce the issue if possible
 4. Allow time for us to address the issue before public disclosure
 
