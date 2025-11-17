@@ -41,5 +41,5 @@ When working in this organization:
 
 ## Learn More
 
-- [GitHub's special .github repository](https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-repository-templates)
+- [GitHub's special .github repository](https://docs.github.com/en/communities/setting-up-your-project-for-healthy-contributions/creating-a-default-community-health-file)
 - [GitHub Copilot documentation](https://docs.github.com/en/copilot)
