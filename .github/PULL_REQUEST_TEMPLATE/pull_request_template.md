@@ -11,7 +11,7 @@ Provide a clear and concise description of the changes in this PR.
 - [ ] Test additions or updates
 
 ## Related Issues
-Closes #(issue number)
+Closes #123 <!-- Replace 123 with the actual issue number, e.g. Closes #45 -->
 
 ## Changes Made
 - List the specific changes made
