@@ -1,0 +1,56 @@
+# Pre-commit Hook Configuration
+# Install with: pip install pre-commit && pre-commit install
+# Run manually: pre-commit run --all-files
+
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.5.0
+    hooks:
+      # Prevent large files from being committed
+      - id: check-added-large-files
+        args: ['--maxkb=1000']
+      
+      # Check for files that would conflict with case-insensitive filesystems
+      - id: check-case-conflict
+      
+      # Ensure files end with a newline
+      - id: end-of-file-fixer
+      
+      # Prevent committing to main/master branches
+      - id: no-commit-to-branch
+        args: ['--branch', 'main', '--branch', 'master']
+      
+      # Check for merge conflict markers
+      - id: check-merge-conflict
+      
+      # Check YAML syntax
+      - id: check-yaml
+        args: ['--safe']
+      
+      # Check JSON syntax
+      - id: check-json
+      
+      # Detect private keys
+      - id: detect-private-key
+      
+      # Mixed line endings
+      - id: mixed-line-ending
+      
+      # Trailing whitespace
+      - id: trailing-whitespace
+  
+  - repo: https://github.com/Yelp/detect-secrets
+    rev: v1.4.0
+    hooks:
+      - id: detect-secrets
+        args: ['--baseline', '.secrets.baseline']
+        exclude: package-lock.json
+  
+  - repo: https://github.com/gitleaks/gitleaks
+    rev: v8.18.1
+    hooks:
+      - id: gitleaks
+
+# Configuration for detect-secrets
+# To establish a baseline: detect-secrets scan > .secrets.baseline
+# To audit findings: detect-secrets audit .secrets.baseline

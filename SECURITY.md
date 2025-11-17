@@ -20,6 +20,13 @@
 - Automated workflows check for secrets, unsafe patterns, and license compliance.
 - Human review on all critical infrastructure or security-impacting changes.
 
+## Credential Exposure Response
+If you receive an alert about exposed credentials, follow the [Security Response Guide](SECURITY_RESPONSE_GUIDE.md) immediately. This guide covers:
+- Verifying the exposure
+- Revoking and rotating compromised credentials
+- Cleaning git history if needed
+- Prevention measures and best practices
+
 ## References
 - [AI_ORCHESTRATION.md](https://github.com/iSystemDevelopment/deep-clean-pro/blob/main/AI_ORCHESTRATION.md) (full developer & automation rules)
 - README in each project repo

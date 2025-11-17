@@ -1,0 +1,70 @@
+# Security - Credentials and Secrets
+# Prevent accidental commit of sensitive files
+.env
+.env.*
+*.pem
+*.key
+*.crt
+*.p12
+*.pfx
+*.keystore
+*.jks
+
+# AWS credentials
+.aws/credentials
+.aws/config
+
+# SSH keys
+id_rsa
+id_dsa
+id_ecdsa
+id_ed25519
+*.ppk
+
+# API keys and tokens
+secrets.yml
+secrets.yaml
+secrets.json
+.secrets
+credentials.yml
+credentials.yaml
+credentials.json
+
+# Database dumps and backups
+*.sql
+*.dump
+*.backup
+
+# Private directories
+private/
+internal/
+confidential/
+ai-context/
+chat-history/
+prompt-history/
+notes/
+
+# IDE and Editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Temporary files
+tmp/
+temp/
+*.tmp
+*.log
+
+# Build artifacts
+node_modules/
+dist/
+build/
+public-export/
+
+# OS files
+Thumbs.db
+.Spotlight-V100
+.Trashes
