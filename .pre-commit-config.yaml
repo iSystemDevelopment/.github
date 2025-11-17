@@ -1,0 +1,58 @@
+# Pre-commit hooks for credential security
+# Install: pip install pre-commit && pre-commit install
+# Run manually: pre-commit run --all-files
+
+repos:
+  # Gitleaks - Detect hardcoded secrets
+  - repo: https://github.com/gitleaks/gitleaks
+    rev: v8.18.1
+    hooks:
+      - id: gitleaks
+
+  # General pre-commit hooks
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.5.0
+    hooks:
+      # Prevent committing large files
+      - id: check-added-large-files
+        args: ['--maxkb=1000']
+      
+      # Prevent committing private keys
+      - id: detect-private-key
+      
+      # Check for AWS credentials
+      - id: detect-aws-credentials
+        args: ['--allow-missing-credentials']
+      
+      # Ensure files end with newline
+      - id: end-of-file-fixer
+      
+      # Trim trailing whitespace
+      - id: trailing-whitespace
+      
+      # Check YAML syntax
+      - id: check-yaml
+        args: ['--safe']
+      
+      # Check JSON syntax
+      - id: check-json
+      
+      # Check for merge conflicts
+      - id: check-merge-conflict
+      
+      # Check case conflicts
+      - id: check-case-conflict
+      
+      # Mixed line endings
+      - id: mixed-line-ending
+        args: ['--fix=lf']
+
+  # TruffleHog for secret detection
+  - repo: https://github.com/trufflesecurity/trufflehog
+    rev: v3.63.2
+    hooks:
+      - id: trufflehog
+        name: TruffleHog
+        entry: bash -c 'trufflehog filesystem --directory=. --only-verified --fail'
+        language: system
+        pass_filenames: false
