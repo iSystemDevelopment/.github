@@ -1,0 +1,53 @@
+# Security - Credentials and Secrets
+*.pem
+*.key
+*.crt
+*.p12
+*.pfx
+.env
+.env.*
+!.env.example
+secrets.yml
+secrets.yaml
+secrets.json
+credentials.json
+service-account*.json
+*.secrets
+
+# AWS
+.aws/
+aws-credentials
+
+# SSH Keys
+id_rsa
+id_rsa.pub
+id_dsa
+id_dsa.pub
+id_ecdsa
+id_ecdsa.pub
+id_ed25519
+id_ed25519.pub
+
+# Private/Internal directories
+internal/
+private/
+notes/
+ai-context/
+chat-history/
+prompt-history/
+
+# Temporary and build artifacts
+*.log
+*.tmp
+*.temp
+*.cache
+.DS_Store
+Thumbs.db
+public-export/
+
+# Editor directories
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
