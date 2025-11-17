@@ -6,7 +6,7 @@ This repository uses GitHub Copilot and other AI assistants to maintain code qua
 
 When working in this repository:
 
-1. **Privacy First**: Do not expose user's original prompts or unpolished requests in public PR descriptions or commits
+1. **Privacy First**: Do not expose users' original prompts or unpolished requests in public PR descriptions or commits
 2. **Professional Tone**: All public-facing documentation should use professional, technical language
 3. **Clear Communication**: PR descriptions should clearly explain what was changed and why
 4. **Quality Standards**: Follow established code quality, security, and testing practices
