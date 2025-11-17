@@ -1,15 +1,17 @@
 # .github
 
-This is the default community health files repository for iSystem Development organization.
+This repository contains default community health files and configurations for the iSystemDevelopment organization.
 
-## License
+## Contents
 
-All repositories under iSystem Development organization are licensed under the [MIT License](LICENSE) unless otherwise specified in the individual repository.
+This repository includes:
 
-## About
+- **Community Health Files**: Default templates and policies that apply across all organization repositories
+- **Workflow Templates**: Reusable GitHub Actions workflows for consistency
+- **Issue and PR Templates**: Standardized templates for issues and pull requests
 
-This special `.github` repository provides default community health files that will be used for any public repository in the organization that doesn't have its own file of that type.
+## Purpose
 
-### Default Files
+The files in this repository help maintain consistency and quality across all repositories in the organization by:
 
 - **LICENSE**: MIT License - Default license for all repositories in the organization
