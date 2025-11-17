@@ -1,7 +1,7 @@
 {
   "name": "Code Quality Workflow",
   "description": "Runs linting, testing, and security checks on pull requests",
-  "iconName": "example-icon",
+  "iconName": "check-circle",
   "categories": [
     "Code Quality",
     "CI/CD"
