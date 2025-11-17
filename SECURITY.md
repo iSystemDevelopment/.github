@@ -1,27 +1,42 @@
-# 🛡️ Security Policy: iSystem Development
+# 🛡️ Security Policy
 
-## Principles
-- Security-first by design, across all repositories.
-- No telemetry/analytics. No hidden data collection.
-- All destructive or system-modifying code must support "dry run" or "what if" modes.
+Welcome to the iSystem Development security policy. We take security seriously and appreciate your help in keeping our projects safe.
 
-## Vulnerability Reporting
-- **Do NOT** open public Issues for security bugs.
-- Instead, use [GitHub Security Advisories](https://github.com/iSystemDevelopment/deep-clean-pro/security/advisories) or email [security@isystem.app](mailto:security@isystem.app).
-- Preferred template and details in each repo's README.
+## Our Security Principles
 
-## Secure Coding Rules
-- No hardcoded secrets/passwords/tokens.
-- Validate inputs, sanitize outputs, follow least privilege.
-- Required security testing (linters, static analysis, PSScriptAnalyzer where relevant).
-- All logs must exclude sensitive/personal data.
+We are committed to:
+- **Security-first design** across all repositories
+- **Privacy by default** — no telemetry, analytics, or hidden data collection
+- **Safe operations** — all destructive or system-modifying code supports "dry run" or "what if" modes
+
+## Reporting Security Vulnerabilities
+
+If you discover a security vulnerability, we appreciate your responsible disclosure:
+
+- **Please do not** open public issues for security bugs
+- **Instead**, report via [GitHub Security Advisories](https://github.com/iSystemDevelopment/deep-clean-pro/security/advisories) or email us at [info@isystem.app](mailto:info@isystem.app)
+- Check each repository's README for specific reporting templates and details
+
+## Secure Coding Standards
+
+Our development practices include:
+- No hardcoded secrets, passwords, or tokens
+- Input validation and output sanitization
+- Least privilege principle in all operations
+- Required security testing (linters, static analysis, PSScriptAnalyzer where relevant)
+- Logs must exclude sensitive and personal data
 
 ## Policy Enforcement
-- Automated workflows check for secrets, unsafe patterns, and license compliance.
-- Human review on all critical infrastructure or security-impacting changes.
 
-## References
-- [AI_ORCHESTRATION.md](https://github.com/iSystemDevelopment/deep-clean-pro/blob/main/AI_ORCHESTRATION.md) (full developer & automation rules)
-- README in each project repo
+We maintain security through:
+- Automated workflows that check for secrets, unsafe patterns, and license compliance
+- Human review for all critical infrastructure or security-impacting changes
 
-Any questions or disclosures: [security@isystem.app](mailto:security@isystem.app)
+## Additional Resources
+
+- [AI_ORCHESTRATION.md](https://github.com/iSystemDevelopment/deep-clean-pro/blob/main/AI_ORCHESTRATION.md) — comprehensive developer and automation guidelines
+- Individual repository README files for project-specific details
+
+---
+
+**Questions or security disclosures?** Contact us at [info@isystem.app](mailto:info@isystem.app)
