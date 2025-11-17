@@ -60,7 +60,7 @@ If you notice any privacy concerns or exposed sensitive information:
 AI assistants working in this organization must:
 
 - Read and follow `.github/copilot-instructions.md` (local file)
-- Never expose user's original prompts in public materials
+- Never expose users' original prompts in public materials
 - Maintain professional communication standards
 - Protect all sensitive information
 - Follow security best practices
