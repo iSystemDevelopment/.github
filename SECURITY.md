@@ -59,10 +59,10 @@ The following files should **NEVER** be committed:
 
 ### Proper Credential Usage
 
-**❌ WRONG:**
+**❌ WRONG** (example - not real credentials):
 ```yaml
-database_password: "MyS3cr3tP@ssw0rd"
-api_key: "sk-1234567890abcdef"
+database_password: "MyS3cr3tP@ssw0rd"  # example only
+api_key: "sk-1234567890abcdef"  # example only
 ```
 
 **✅ CORRECT:**
