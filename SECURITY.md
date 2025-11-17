@@ -1,46 +1,42 @@
-# Security Policy
+# 🛡️ Security Policy
 
-## Reporting a Vulnerability
+Welcome to the iSystem Development security policy. We take security seriously and appreciate your help in keeping our projects safe.
 
-We take security seriously. If you discover a security vulnerability, please follow these steps:
+## Our Security Principles
 
-1. **Do not** open a public issue
-2. Email the security team at [security@isystemdevelopment.com](mailto:security@isystemdevelopment.com) with details of the vulnerability
-3. Include steps to reproduce the issue if possible
-4. Allow time for us to address the issue before public disclosure
+We are committed to:
+- **Security-first design** across all repositories
+- **Privacy by default** — no telemetry, analytics, or hidden data collection
+- **Safe operations** — all destructive or system-modifying code supports "dry run" or "what if" modes
 
-## Supported Versions
+## Reporting Security Vulnerabilities
 
-We provide security updates for the following versions:
+If you discover a security vulnerability, we appreciate your responsible disclosure:
 
-| Version | Supported          |
-| ------- | ------------------ |
-| Latest  | :white_check_mark: |
-| Older   | :x:                |
+- **Please do not** open public issues for security bugs
+- **Instead**, report via [GitHub Security Advisories](https://github.com/iSystemDevelopment/deep-clean-pro/security/advisories) or email us at [info@isystem.app](mailto:info@isystem.app)
+- Check each repository's README for specific reporting templates and details
 
-## Security Best Practices
+## Secure Coding Standards
 
-When contributing to our projects:
+Our development practices include:
+- No hardcoded secrets, passwords, or tokens
+- Input validation and output sanitization
+- Least privilege principle in all operations
+- Required security testing (linters, static analysis, PSScriptAnalyzer where relevant)
+- Logs must exclude sensitive and personal data
 
-- Never commit secrets, API keys, passwords, or other sensitive data
-- Use environment variables for configuration
-- Keep dependencies up to date
-- Follow secure coding practices
-- Validate and sanitize all inputs
-- Use prepared statements for database queries
-- Implement proper authentication and authorization
+## Policy Enforcement
 
-## Dependency Security
+We maintain security through:
+- Automated workflows that check for secrets, unsafe patterns, and license compliance
+- Human review for all critical infrastructure or security-impacting changes
 
-- Regularly update dependencies to address known vulnerabilities
-- Review security advisories for used packages
-- Use tools like Dependabot to automate dependency updates
-- Run security scans as part of CI/CD pipelines
+## Additional Resources
 
-## Code Review
+- [AI_ORCHESTRATION.md](https://github.com/iSystemDevelopment/deep-clean-pro/blob/main/AI_ORCHESTRATION.md) — comprehensive developer and automation guidelines
+- Individual repository README files for project-specific details
 
-- All code changes require review before merging
-- Security-sensitive changes require additional scrutiny
-- Automated security checks run on all pull requests
+---
 
-Thank you for helping keep our projects secure!
+**Questions or security disclosures?** Contact us at [info@isystem.app](mailto:info@isystem.app)

@@ -1,21 +1,10 @@
-# Prevent exposing unpolished prompts and agent configurations
-.github/agents/
-*.prompt
-*.agent
-**/prompts/
-**/drafts/
+# Sensitive AI instructions - not for public viewing
+.github/copilot-instructions.md
 
-# Build artifacts
-dist/
-build/
-*.log
+# Temporary files
 *.tmp
-
-# Dependencies
-node_modules/
-vendor/
-.env
-.env.local
+*.temp
+.DS_Store
 
 # IDE and editor files
 .vscode/
@@ -23,10 +12,17 @@ vendor/
 *.swp
 *.swo
 *~
-.DS_Store
 
-# Temporary files
-tmp/
-temp/
-*.bak
-*.orig
+# Environment files
+.env
+.env.local
+.env.*.local
+
+# Build artifacts
+dist/
+build/
+node_modules/
+
+# Logs
+*.log
+logs/

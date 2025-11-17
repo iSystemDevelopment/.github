@@ -1,0 +1,87 @@
+name: Private Content Protection
+
+on:
+  push:
+    branches: ["**"]
+  pull_request:
+    branches: ["main", "develop"]
+
+jobs:
+  protect-content:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Determine repo type
+        id: repotype
+        run: |
+          REPO_FULL="${GITHUB_REPOSITORY}"
+          REPO_NAME="${REPO_FULL#*/}"
+
+          echo "Repository: $REPO_FULL (name: $REPO_NAME)"
+
+          if [[ "$REPO_NAME" == *"-private" ]]; then
+            echo "type=private" >> "$GITHUB_OUTPUT"
+          else
+            echo "type=public" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Scan for secret-like files (all repos)
+        run: |
+          echo "Scanning for obvious secret files..."
+
+          SECRET_FILES=$(find . -type f \( \
+            -name ".env" -o \
+            -name ".env.*" -o \
+            -name "*.pem" -o \
+            -name "*.key" -o \
+            -name "*.crt" \
+          \) | sed 's|^\./||' || true)
+
+          if [ -n "$SECRET_FILES" ]; then
+            echo "::error::Potential secret files found (must not be committed):"
+            echo "$SECRET_FILES"
+            exit 1
+          fi
+
+          echo "No obvious secret files found."
+
+      - name: Scan for private prompt leaks (public repos only)
+        if: steps.repotype.outputs.type == 'public'
+        run: |
+          echo "Scanning for private/internal prompt content in public repo..."
+
+          # Forbidden markers in PUBLIC repos
+          MATCHES=$(grep -RInE "AI:|INTERNAL:|CONFIDENTIAL|PRIVATE PROMPT|prompt-history" . || true)
+
+          if [ -n "$MATCHES" ]; then
+            echo "::error::Potential private or internal prompt content found in PUBLIC repository:"
+            echo "$MATCHES"
+            echo "Remove these markers or move content to the private repo."
+            exit 1
+          fi
+
+          echo "No forbidden markers detected for public repo."
+
+      - name: Check for forbidden internal-only directories in public repos
+        if: steps.repotype.outputs.type == 'public'
+        run: |
+          echo "Checking for internal-only directories in public repo..."
+          FORBIDDEN_DIRS="internal private notes ai-context chat-history prompt-history"
+
+          FOUND=false
+
+          for d in $FORBIDDEN_DIRS; do
+            if [ -d "$d" ]; then
+              echo "::error::Forbidden internal directory '$d' found in PUBLIC repository."
+              FOUND=true
+            fi
+          done
+
+          if [ "$FOUND" = true ]; then
+            exit 1
+          fi
+
+          echo "No forbidden internal-only directories in public repo."
