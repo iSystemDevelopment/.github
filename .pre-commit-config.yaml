@@ -1,0 +1,42 @@
+# Pre-commit hooks for secret detection and code quality
+# See https://pre-commit.com for more information
+# Install: pip install pre-commit
+# Setup: pre-commit install
+
+repos:
+  # Secret scanning with gitleaks
+  - repo: https://github.com/gitleaks/gitleaks
+    rev: v8.18.1
+    hooks:
+      - id: gitleaks
+
+  # Detect private keys
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.5.0
+    hooks:
+      - id: detect-private-key
+      - id: check-added-large-files
+        args: ['--maxkb=500']
+      - id: check-merge-conflict
+      - id: check-yaml
+        args: ['--unsafe']  # Allow custom YAML tags
+      - id: end-of-file-fixer
+      - id: trailing-whitespace
+      - id: mixed-line-ending
+
+  # Check for AWS credentials
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.5.0
+    hooks:
+      - id: detect-aws-credentials
+        args: ['--allow-missing-credentials']
+
+  # Additional secret patterns
+  - repo: local
+    hooks:
+      - id: check-forbidden-patterns
+        name: Check for forbidden secret patterns
+        entry: bash -c 'grep -rn --include="*.{js,ts,py,java,go,rb,php,yml,yaml,json,md,txt,sh}" -E "(password|secret|api_key|apikey|token|private_key|aws_access_key_id|aws_secret_access_key)\s*[:=]\s*[\"'\''][^\"'\'']{8,}[\"'\'']" . && exit 1 || exit 0'
+        language: system
+        pass_filenames: false
+        always_run: true
