@@ -20,7 +20,7 @@ The alert referenced the following files:
 - `.github/workflows/smart-sanitizer.yml` (lines 101, 106, 111) - Various credentials
 
 ### Current State
-- **README.md**: Only 15 lines long (not 124+)
+- **README.md**: Now 65 lines long (previously only 15 lines; not 124+)
 - **SMART_SANITIZER_GUIDE.md**: Does not exist in repository
 - `.github/workflows/smart-sanitizer.yml`: Does not exist in repository
 
