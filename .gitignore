@@ -1,0 +1,39 @@
+# Sensitive files and directories
+.env
+.env.*
+*.pem
+*.key
+*.crt
+*.p12
+*.pfx
+*.jks
+*.keystore
+
+# Private/internal directories (for repos using sanitization)
+internal/
+private/
+notes/
+ai-context/
+chat-history/
+prompt-history/
+
+# IDE and OS files
+.DS_Store
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Temporary and build files
+tmp/
+temp/
+dist/
+build/
+node_modules/
+*.log
+
+# Backup files
+*.bak
+*.backup
+*.old

@@ -11,14 +11,16 @@
 - Preferred template and details in each repo's README.
 
 ## Secure Coding Rules
-- No hardcoded secrets/passwords/tokens.
+- **No hardcoded secrets/passwords/tokens** - See [CREDENTIAL_SECURITY.md](CREDENTIAL_SECURITY.md) for comprehensive guidance.
 - Validate inputs, sanitize outputs, follow least privilege.
 - Required security testing (linters, static analysis, PSScriptAnalyzer where relevant).
 - All logs must exclude sensitive/personal data.
 
 ## Policy Enforcement
-- Automated workflows check for secrets, unsafe patterns, and license compliance.
+- **Automated secret scanning** on every push and pull request (see `.github/workflows/secret-scanning.yml`).
+- Automated workflows check for unsafe patterns and license compliance.
 - Human review on all critical infrastructure or security-impacting changes.
+- Pre-commit hooks recommended for local secret detection.
 
 ## References
 - [AI_ORCHESTRATION.md](https://github.com/iSystemDevelopment/deep-clean-pro/blob/main/AI_ORCHESTRATION.md) (full developer & automation rules)
