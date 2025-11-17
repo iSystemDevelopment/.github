@@ -1,0 +1,334 @@
+name: 'Private Activity Tracker - Authorized Users Only'
+
+on:
+  push:
+    branches: ['**']
+  pull_request:
+    types: [opened, synchronize, reopened, edited]
+  pull_request_review:
+    types: [submitted]
+  issues:
+    types: [opened, edited, closed, reopened]
+  issue_comment:
+    types: [created, edited]
+  create:
+  delete:
+
+permissions:
+  contents: read
+  actions: write
+
+env:
+  AUTHORIZED_USER: 'Dr-Diodac'
+
+jobs:
+  track-activity:
+    name: Track and Analyze Activity (Private)
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4.1.1
+        with:
+          fetch-depth: 50
+          persist-credentials: false
+
+      - name: Collect Activity Data
+        id: collect
+        uses: actions/github-script@60a0d83039c74a4aee543508d2ffcb1c3799cdea # v7.0.1
+        with:
+          script: |
+            const eventName = context.eventName;
+            const actor = context.actor;
+            const payload = context.payload;
+            
+            let activityData = {
+              timestamp: new Date().toISOString(),
+              event: eventName,
+              actor: actor,
+              repository: context.repo.owner + '/' + context.repo.repo,
+              details: {}
+            };
+            
+            // Collect event-specific details
+            switch(eventName) {
+              case 'push':
+                activityData.details = {
+                  ref: context.ref,
+                  commits: payload.commits?.length || 0,
+                  forced: payload.forced || false,
+                  commit_messages: payload.commits?.map(c => c.message) || []
+                };
+                break;
+                
+              case 'pull_request':
+                activityData.details = {
+                  action: payload.action,
+                  pr_number: payload.pull_request?.number,
+                  title: payload.pull_request?.title,
+                  additions: payload.pull_request?.additions,
+                  deletions: payload.pull_request?.deletions,
+                  changed_files: payload.pull_request?.changed_files
+                };
+                break;
+                
+              case 'issues':
+                activityData.details = {
+                  action: payload.action,
+                  issue_number: payload.issue?.number,
+                  title: payload.issue?.title,
+                  labels: payload.issue?.labels?.map(l => l.name)
+                };
+                break;
+                
+              case 'create':
+              case 'delete':
+                activityData.details = {
+                  ref_type: payload.ref_type,
+                  ref: payload.ref
+                };
+                break;
+            }
+            
+            core.setOutput('activity-data', JSON.stringify(activityData));
+            core.setOutput('event-type', eventName);
+            core.setOutput('actor', actor);
+            
+            return activityData;
+
+      - name: Analyze for Potential Issues
+        id: analyze
+        uses: actions/github-script@60a0d83039c74a4aee543508d2ffcb1c3799cdea # v7.0.1
+        with:
+          script: |
+            const eventName = context.eventName;
+            const payload = context.payload;
+            const actor = context.actor;
+            
+            let issues = [];
+            let recommendations = [];
+            let severity = 'info';
+            
+            // Analyze based on event type
+            if (eventName === 'push') {
+              const commits = payload.commits || [];
+              const forced = payload.forced;
+              const branch = context.ref;
+              
+              // Check for force push
+              if (forced) {
+                issues.push({
+                  type: 'force-push',
+                  severity: 'high',
+                  message: 'Force push detected',
+                  details: `Force pushed to ${branch}`
+                });
+                recommendations.push({
+                  issue: 'force-push',
+                  solution: 'Avoid force pushing to shared branches. Use revert commits instead.',
+                  action: 'Consider creating a new branch and PR if major changes are needed.'
+                });
+                severity = 'high';
+              }
+              
+              // Check commit messages
+              for (const commit of commits) {
+                const msg = commit.message.toLowerCase();
+                
+                // Check for potentially sensitive commit messages
+                if (msg.includes('password') || msg.includes('secret') || msg.includes('key')) {
+                  issues.push({
+                    type: 'sensitive-message',
+                    severity: 'critical',
+                    message: 'Commit message may reference sensitive information',
+                    details: `Commit: "${commit.message}"`
+                  });
+                  recommendations.push({
+                    issue: 'sensitive-message',
+                    solution: 'Never reference credentials in commit messages.',
+                    action: 'Review the commit for actual credential exposure.'
+                  });
+                  severity = 'critical';
+                }
+                
+                // Check for poor commit messages
+                if (msg.length < 10 || msg === 'update' || msg === 'fix') {
+                  issues.push({
+                    type: 'poor-commit-message',
+                    severity: 'low',
+                    message: 'Non-descriptive commit message',
+                    details: `Commit: "${commit.message}"`
+                  });
+                }
+              }
+              
+              // Check for commits to main/master
+              if (branch.includes('main') || branch.includes('master')) {
+                issues.push({
+                  type: 'direct-main-commit',
+                  severity: 'medium',
+                  message: 'Direct commit to main branch',
+                  details: `${commits.length} commit(s) pushed to ${branch}`
+                });
+                if (severity === 'info') severity = 'medium';
+              }
+            }
+            
+            if (eventName === 'pull_request') {
+              const pr = payload.pull_request;
+              
+              // Check PR size
+              const totalChanges = (pr.additions || 0) + (pr.deletions || 0);
+              if (totalChanges > 500) {
+                issues.push({
+                  type: 'large-pr',
+                  severity: 'medium',
+                  message: 'Very large pull request',
+                  details: `${totalChanges} lines changed in ${pr.changed_files} files`
+                });
+                if (severity === 'info') severity = 'medium';
+              }
+            }
+            
+            if (eventName === 'delete') {
+              const refType = payload.ref_type;
+              const ref = payload.ref;
+              
+              if (refType === 'branch' && (ref.includes('main') || ref.includes('master'))) {
+                issues.push({
+                  type: 'main-branch-deletion',
+                  severity: 'critical',
+                  message: 'Main branch deletion attempted',
+                  details: `Branch: ${ref}`
+                });
+                severity = 'critical';
+              }
+            }
+            
+            core.setOutput('has-issues', issues.length > 0 ? 'true' : 'false');
+            core.setOutput('issue-count', issues.length);
+            core.setOutput('severity', severity);
+            core.setOutput('issues', JSON.stringify(issues));
+            core.setOutput('recommendations', JSON.stringify(recommendations));
+            
+            return { issues, recommendations, severity };
+
+      - name: Generate Private Activity Report
+        if: always()
+        id: report
+        run: |
+          mkdir -p /tmp/private-reports
+          
+          REPORT_FILE="/tmp/private-reports/activity-report-${{ github.run_id }}.md"
+          
+          cat > "$REPORT_FILE" << 'REPORT_EOF'
+          # 🔒 PRIVATE ACTIVITY TRACKING REPORT
+          
+          **CONFIDENTIAL - AUTHORIZED USER ONLY: ${{ env.AUTHORIZED_USER }}**
+          
+          ---
+          
+          ## Activity Summary
+          
+          **User:** @${{ steps.collect.outputs.actor }}
+          **Event:** ${{ steps.collect.outputs.event-type }}
+          **Timestamp:** $(date -u +"%Y-%m-%dT%H:%M:%SZ")
+          **Repository:** ${{ github.repository }}
+          **Workflow Run:** ${{ github.run_id }}
+          
+          ### Activity Data
+          
+          ```json
+          ${{ steps.collect.outputs.activity-data }}
+          ```
+          
+          ### Issue Analysis
+          
+          **Issues Detected:** ${{ steps.analyze.outputs.issue-count }}
+          **Severity Level:** ${{ steps.analyze.outputs.severity }}
+          
+          REPORT_EOF
+          
+          # Add issues if any
+          if [ "${{ steps.analyze.outputs.has-issues }}" == "true" ]; then
+            cat >> "$REPORT_FILE" << 'ISSUES_EOF'
+          
+          #### Detected Issues
+          
+          ```json
+          ${{ steps.analyze.outputs.issues }}
+          ```
+          
+          #### Recommendations
+          
+          ```json
+          ${{ steps.analyze.outputs.recommendations }}
+          ```
+          
+          ISSUES_EOF
+          fi
+          
+          cat >> "$REPORT_FILE" << 'FOOTER_EOF'
+          
+          ---
+          
+          ## Access Information
+          
+          **Report ID:** ${{ github.run_id }}
+          **Generated:** $(date -u +"%Y-%m-%dT%H:%M:%SZ")
+          **Access Level:** PRIVATE
+          **Authorized for:** ${{ env.AUTHORIZED_USER }}
+          
+          ### How to Access
+          
+          1. Navigate to Actions tab
+          2. Select this workflow run (#${{ github.run_id }})
+          3. Download from Artifacts section
+          4. Review privately - do not share
+          
+          ---
+          
+          *This is a confidential activity report. Do not share publicly.*
+          FOOTER_EOF
+          
+          echo "report-generated=true" >> $GITHUB_OUTPUT
+
+      - name: Upload Private Activity Report
+        if: always()
+        uses: actions/upload-artifact@5d5d22a31266ced268874388b861e4b58bb5c2f3 # v4.3.1
+        with:
+          name: private-activity-report-${{ github.run_id }}
+          path: /tmp/private-reports/
+          retention-days: 90
+          if-no-files-found: error
+
+      - name: Summary for Authorized User
+        if: always()
+        run: |
+          echo "================================================"
+          echo "  PRIVATE ACTIVITY TRACKING REPORT GENERATED"
+          echo "================================================"
+          echo "Event: ${{ steps.collect.outputs.event-type }}"
+          echo "Actor: ${{ steps.collect.outputs.actor }}"
+          echo "Issues Found: ${{ steps.analyze.outputs.issue-count }}"
+          echo "Severity: ${{ steps.analyze.outputs.severity }}"
+          echo "Authorized User: ${{ env.AUTHORIZED_USER }}"
+          echo "Report Location: Workflow Artifacts (Private)"
+          echo "================================================"
+          echo ""
+          echo "⚠️  CONFIDENTIAL REPORT - RESTRICTED ACCESS"
+          echo "✅ Report stored in private artifacts"
+          echo "✅ Only authorized user can access"
+          echo "🔒 No public comments will be posted"
+          echo "🔒 No public issues will be created"
+          echo ""
+          echo "Authorized user can download report from:"
+          echo "Actions → Workflow run #${{ github.run_id }} → Artifacts"
+          echo ""
+          if [ "${{ steps.analyze.outputs.has-issues }}" == "true" ]; then
+            echo "⚠️  ATTENTION: Issues detected in this activity"
+            echo "   Severity: ${{ steps.analyze.outputs.severity }}"
+            echo "   Review the private report for details"
+          else
+            echo "✅ No issues detected - activity follows best practices"
+          fi

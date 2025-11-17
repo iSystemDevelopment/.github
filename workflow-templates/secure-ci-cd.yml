@@ -1,0 +1,72 @@
+name: Secure CI/CD Workflow
+
+on:
+  push:
+    branches: [ main, master, develop ]
+  pull_request:
+    branches: [ main, master, develop ]
+
+# Set minimal permissions by default
+permissions:
+  contents: read
+
+jobs:
+  security-checks:
+    name: Security Checks
+    runs-on: ubuntu-latest
+    
+    permissions:
+      contents: read
+      security-events: write
+      
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          # Persist credentials for subsequent steps
+          persist-credentials: false
+
+      - name: Run security scan
+        run: |
+          echo "Add your security scanning commands here"
+          # Examples:
+          # - npm audit
+          # - pip-audit
+          # - trivy scan
+          # - snyk test
+
+  build:
+    name: Build and Test
+    runs-on: ubuntu-latest
+    needs: security-checks
+    
+    permissions:
+      contents: read
+      
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+
+      - name: Setup environment
+        run: |
+          echo "Setup your build environment"
+
+      - name: Build
+        run: |
+          echo "Add your build commands here"
+
+      - name: Test
+        run: |
+          echo "Add your test commands here"
+
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: build-artifacts
+          path: |
+            # Add paths to your build artifacts
+            # dist/
+            # build/
+          retention-days: 30
