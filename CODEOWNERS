@@ -1,29 +1,9 @@
-# Code Owners
-# These owners will be the default reviewers for everything in the repo.
-# Unless a later match takes precedence, they will be requested for review when someone opens a pull request.
-#
-# IMPORTANT: The following GitHub teams must be created in the organization before this file will work:
-#   - @iSystemDevelopment/maintainers
-#   - @iSystemDevelopment/docs-team
-#   - @iSystemDevelopment/devops-team
-#   - @iSystemDevelopment/security-team
-#
-# To create teams: Organization Settings → Teams → New team
-# After creating teams, add appropriate members to each team.
-#
-# Until teams are created, you can use individual GitHub usernames instead (e.g., @username).
+# For more information or to request ownership changes, contact @Dr-Diodac: https://github.com/Dr-Diodac
 
-# Global owners for all files
-* @iSystemDevelopment/maintainers
-
-# Documentation owners
-*.md @iSystemDevelopment/docs-team
-
-# Configuration files
-*.yml @iSystemDevelopment/devops-team
-*.yaml @iSystemDevelopment/devops-team
-*.json @iSystemDevelopment/devops-team
-
-# Security-related files
-SECURITY.md @iSystemDevelopment/security-team
-.github/workflows/* @iSystemDevelopment/devops-team
+* @Dr-Diodac
+*.md @Dr-Diodac
+*.yml @Dr-Diodac
+*.yaml @Dr-Diodac
+*.json @Dr-Diodac
+SECURITY.md @Dr-Diodac
+.github/workflows/* @Dr-Diodac
