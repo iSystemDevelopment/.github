@@ -31,7 +31,7 @@ Our mission: Revolutionize technology, productivity, and innovation by orchestra
 - **Team:** Full AI-Human Dreamteam collaboration
 - **Status:** Production deployment ready
 
-Learn more: [`docs/MANIFESTO.md`](docs/MANIFESTO.md) | [`docs/WORKFLOW.md`](docs/WORKFLOW.md)
+Learn more: [`docs/MANIFESTO.md`](..docs/MANIFESTO.md) | [`docs/WORKFLOW.md`](..docs/WORKFLOW.md)
 
 ---
 
@@ -41,8 +41,8 @@ Learn more: [`docs/MANIFESTO.md`](docs/MANIFESTO.md) | [`docs/WORKFLOW.md`](docs
 - [ACCESS_CONTROL.md](.github/ACCESS_CONTROL.md)
 - [AI_ORCHESTRATION.md](.github/AI_ORCHESTRATION.md)
 - [AI_ACTIVITY_LOG.md](.github/AI_ACTIVITY_LOG.md)
-- [FAQ.md](docs/FAQ.md)
-- [HELP.md](docs/HELP.md)
+- [FAQ.md](..docs/FAQ.md)
+- [HELP.md](..docs/HELP.md)
 - [DREAMTEAM_INDEX.md](.github/DREAMTEAM_INDEX.md)
 
 **See our [Wiki](https://github.com/iSystemDevelopment/.github/wiki) for onboarding, FAQ, collaboration, and technical help.**
