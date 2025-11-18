@@ -8,55 +8,29 @@
 
 # FAQ.md — AI-Human Dreamteam (Org Standard)
 
-> _For project-specific details, see your repository’s FAQ.md.  
-> This org FAQ covers typical questions about team structure, AI collaboration, onboarding, and workflows._
-
 ---
-
 ## What is the AI-Human Dreamteam?
-
-A blended team where humans and specialized AI agents (Claude, ChatGPT Pro, Gemini Ultra, Copilot) collaborate using a clear workflow and roles for every project.
-
----
+A blended team of humans and specialized AI agents collaborating via clear workflows and roles.
 
 ## How do I join a Dreamteam project?
-
-1. Review [ONBOARDING.md](ONBOARDING.md) in your repo.
-2. Read org-level docs ([ACCESS_CONTROL.md](ACCESS_CONTROL.md), [WORKFLOW.md](WORKFLOW.md), [AI_ORCHESTRATION.md](AI_ORCHESTRATION.md)).
-3. Connect your Slack user/email for live notifications (see [SLACK_INTEGRATION.md](SLACK_INTEGRATION.md)).
-
----
+1. Read [ONBOARDING.md](ONBOARDING.md).
+2. Review org docs: [ACCESS_CONTROL.md](ACCESS_CONTROL.md), [WORKFLOW.md](WORKFLOW.md), [AI_ORCHESTRATION.md](AI_ORCHESTRATION.md).
+3. Connect your Slack user (see [SLACK_INTEGRATION.md](SLACK_INTEGRATION.md)).
 
 ## How do we document AI-assisted work?
+- All significant actions are logged: [AI_ACTIVITY_LOG.md](AI_ACTIVITY_LOG.md).
+- Use branch/commit notation with `[AI-assist: Claude]`, etc.
 
-- All significant actions/handoffs are logged in [AI_ACTIVITY_LOG.md](AI_ACTIVITY_LOG.md).
-- Commit, PR, and branch naming conventions include `[AI-assist: Claude]`, etc.
-- Project docs reference org standards for workflows.
+## Need help or stuck?
+- See [HELP.md](HELP.md) or ping on Slack.
 
----
+## Security?
+- No credentials in public; security led by Claude.
 
-## What if I need help or get stuck?
-
-- See [HELP.md](HELP.md) for detailed troubleshooting and support contacts.
-- Ask in project Slack channel for real-time help.
-
----
-
-## How is project security managed?
-
-- No credentials or business data in public repos.
-- Security reviews and automation led by Claude (AI), reported in [AI_ACTIVITY_LOG.md](AI_ACTIVITY_LOG.md).
-- Access control is managed by org and project docs.
+## Contact?
+- Dr-Diodac (info@isystem.app) or relevant project lead.
 
 ---
-
-## Who do I contact with urgent questions?
-
-- For AI/Human roles: Lead (Dr-Diodac, info@isystem.app)
-- For project bugs/support: Use Slack, see [HELP.md](HELP.md).
-
----
-
 # Document Metadata
 version: 1.0.0
 last_updated: 2025-11-18
