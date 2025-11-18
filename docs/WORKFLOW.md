@@ -8,8 +8,8 @@
 
 # WORKFLOW.md — Org Standard (adapt in repo)
 
-> _Reference and starting point for project workflow docs. Based on Claude/Copilot brainstorming and transcript.  
-> See Smart Inventory Builder repo for tailored project workflow._
+> For customized workflows, see your project repo’s WORKFLOW.md  
+> Org-level reference, based on Claude/Copilot best-practice.
 
 ---
 
@@ -28,43 +28,28 @@
 
 ### Development Phases
 
-1. **Planning Phase (Claude/ChatGPT Pro Assisted)**
-   - Discuss architecture/design with AIs and human lead
-   - Create design doc, review security, prepare integration specs
-2. **Implementation Phase**
-   - Feature branch per task (`feature/[feature-name]`)
-   - Copilot for rapid dev, Claude/Gemini/ChatGPT collaboration
-   - AI-assist notation in commits
-3. **Review Phase**
-   - Security audits (Claude), code quality, handoff accountability, sanitization for public sync
-   - Integration testing
-4. **Documentation Phase**
-   - API endpoints, README, deployment guides
-   - Full documentation coverage, activity log updates
+1. **Planning Phase**: AIs and human lead discuss architecture/design.  
+2. **Implementation Phase**: Feature branches, Copilot rapid dev, AI/dreamteam notation in commits.  
+3. **Review Phase**: Security audit, code review, public sync sanitization, integration test.  
+4. **Documentation Phase**: API endpoints, deployment guides, activity logs.
 
 ---
 
 ## 📋 Project Roadmap (Template)
 
-- Phase 1: Initial Deployment  
-  - Core system, main integrations, setup
-- Phase 2: Integration Enhancements  
-- Phase 3: Optimization  
-- Phase 4: Advanced Features  
+- Initial deployment, integrations, enhancements, optimizations, advanced features
 
 ---
 
 ## 🔒 Security Workflow
 
-- Private-to-public sync requires sanitization, credential reviews, activity log check
-- Sensitive data managed via secrets, .env files, access policies
+- Sanitization, credential reviews, activity log check, secrets, .env files, access policies
 
 ---
 
-## 🤖 AI Collaboration Success Metrics
+## 🤖 Success Metrics
 
-- Code quality, test coverage, speedup, handoff effectiveness
-- Weekly/monthly reviews, documentation completeness
+- Code quality, test coverage, speedup, handoff effectiveness, doc completeness
 
 ---
 
@@ -72,8 +57,9 @@
 - [ACCESS_CONTROL.md](ACCESS_CONTROL.md)
 - [AI_ORCHESTRATION.md](AI_ORCHESTRATION.md)
 - [AI_ACTIVITY_LOG.md](AI_ACTIVITY_LOG.md)
+- [DREAMTEAM_INDEX.md](DREAMTEAM_INDEX.md)
 - [FAQ.md](FAQ.md)
-- Project repo should reference this doc and apply customizations as needed.
+- [HELP.md](HELP.md)
 
 ---
 # Document Metadata
