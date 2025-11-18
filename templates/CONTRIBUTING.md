@@ -1,19 +1,44 @@
-# 🤝 Contributing to iSystem Development Projects
+<!--
+╔═══════════════════════════════════════════════════════════════════╗
+║         🚀 DREAMTEAM CONTRIBUTING — ORG/PUBLIC REPO TEMPLATE      ║
+╠═══════════════════════════════════════════════════════════════════╣
+║ Contribution etiquette for Dreamteam projects.                   ║
+╚═══════════════════════════════════════════════════════════════════╝
+-->
 
-Thank you for contributing! We welcome code, docs, bug reports, testing, and ideas.
+# CONTRIBUTING.md — Org Template
 
-**Before you contribute:**
-- Review and follow all rules in [AI_ORCHESTRATION.md](https://github.com/iSystemDevelopment/deep-clean-pro/blob/main/AI_ORCHESTRATION.md) and [SECURITY.md](https://github.com/iSystemDevelopment/.github/blob/main/SECURITY.md).
-- For major changes, open an Issue/Discussion first.
-- Do **not** include secrets, internal links, or proprietary info in code or docs.
-- Always use feature branches, descriptive commit messages, and PR templates.
+> Use this file for contribution guidelines: etiquette, AI-collab protocols, commit conventions.
 
-**Development/Testing Guidelines:**
-- Run all tests and linters before submitting PRs.
-- Use the style guides in AI_ORCHESTRATION.md and referenced docs.
+---
 
-**Security/Privacy:**
-- Never expose secrets, credentials, or sensitive data.
-- Review [SECURITY.md](https://github.com/iSystemDevelopment/.github/blob/main/SECURITY.md) for disclosure and safeguarding protocols.
+## How to Contribute
 
-See full contribution details, PR checklist, and reporting procedures in the repo's README and [AI_ORCHESTRATION.md](https://github.com/iSystemDevelopment/deep-clean-pro/blob/main/AI_ORCHESTRATION.md).
+- Fork project, make changes
+- Use feature branches (`feature/[name]`)
+- **AI-assisted PRs**: Clearly mark AI involvement in PR or commits (`[AI-assist: Claude]`)
+- Document feature or fix in project [AI_ACTIVITY_LOG.md](../docs/AI_ACTIVITY_LOG.md)
+
+---
+
+## Code Review & Approval
+
+- PRs must be reviewed by at least one human and one AI agent (as assigned in [../docs/ACCESS_CONTROL.md](../docs/ACCESS_CONTROL.md))
+
+---
+
+## Helpful Docs
+
+- [../docs/WORKFLOW.md](../docs/WORKFLOW.md)
+- [../docs/AI_ACTIVITY_LOG.md](../docs/AI_ACTIVITY_LOG.md)
+- [../docs/FAQ.md](../docs/FAQ.md)
+- [PULL_REQUEST_TEMPLATE.md](PULL_REQUEST_TEMPLATE.md)
+
+---
+# Document Metadata
+version: 1.0.0
+last_updated: 2025-11-18
+last_updated_by: AI-Human Dreamteam
+next_review: 2025-12-01
+stability: stable
+---
