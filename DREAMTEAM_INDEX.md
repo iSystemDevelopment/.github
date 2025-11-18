@@ -7,7 +7,7 @@
 |-------------------------|-------------------------------------------|-------------|
 | [README.md](profile/README.md)             | Org overview, branding                   | ✅ Stable   |
 | [MANIFESTO.md](docs/MANIFESTO.md)          | Vision, principles, outreach             | ✅ Stable   |
-| [LICENSE](LICENSE)                         | License terms, IP rights                 | ✅ Stable   |
+| [LICENSE](LICENSE.md)                         | License terms, IP rights                 | ✅ Stable   |
 
 ### Core Processes
 | Document                      | Purpose                                   | Status      |
