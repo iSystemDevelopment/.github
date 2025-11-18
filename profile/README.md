@@ -8,7 +8,7 @@
 ╚═══════════════════════════════════════════════════════════════════╝
 -->
 
-[![License: Proprietary](https://img.shields.io/badge/license-Proprietary-red.svg)](LICENSE)
+[![License: Proprietary](https://img.shields.io/badge/license-Proprietary-red.svg)](../LICENSE)
 
 # iSystem Development 🚀 — Home of the AI-Human Dreamteam
 
@@ -31,19 +31,19 @@ Our mission: Revolutionize technology, productivity, and innovation by orchestra
 - **Team:** Full AI-Human Dreamteam collaboration
 - **Status:** Production deployment ready
 
-Learn more: [`docs/MANIFESTO.md`](..docs/MANIFESTO.md) | [`docs/WORKFLOW.md`](..docs/WORKFLOW.md)
+Learn more: [MANIFESTO.md](../docs/MANIFESTO.md) | [WORKFLOW.md](../docs/WORKFLOW.md)
 
 ---
 
 ## 📚 Documentation Index
 
-- [WORKFLOW.md](.github/WORKFLOW.md)
-- [ACCESS_CONTROL.md](.github/ACCESS_CONTROL.md)
-- [AI_ORCHESTRATION.md](.github/AI_ORCHESTRATION.md)
-- [AI_ACTIVITY_LOG.md](.github/AI_ACTIVITY_LOG.md)
-- [FAQ.md](..docs/FAQ.md)
-- [HELP.md](..docs/HELP.md)
-- [DREAMTEAM_INDEX.md](.github/DREAMTEAM_INDEX.md)
+- [WORKFLOW.md](../docs/WORKFLOW.md)
+- [ACCESS_CONTROL.md](../docs/ACCESS_CONTROL.md)
+- [AI_ORCHESTRATION.md](../docs/AI_ORCHESTRATION.md)
+- [AI_ACTIVITY_LOG.md](../docs/AI_ACTIVITY_LOG.md)
+- [FAQ.md](../docs/FAQ.md)
+- [HELP.md](../docs/HELP.md)
+- [DREAMTEAM_INDEX.md](../DREAMTEAM_INDEX.md)
 
 **See our [Wiki](https://github.com/iSystemDevelopment/.github/wiki) for onboarding, FAQ, collaboration, and technical help.**
 
@@ -60,20 +60,19 @@ Learn more: [`docs/MANIFESTO.md`](..docs/MANIFESTO.md) | [`docs/WORKFLOW.md`](..
 
 ## 🌐 Quick Links
 
-- [HTML Documentation Preview](docs/html/index.html) _(Coming soon)_
+- [HTML Documentation Preview](../docs/html/index.html) _(Coming soon)_
 - [Live ChatBot Help](#) _(Setup instructions in MANIFESTO.md)_
-- [Slack Integration Setup](docs/SLACK_INTEGRATION.md) _(Coming soon)_
+- [Slack Integration Setup](../docs/SLACK_INTEGRATION.md) _(Coming soon)_
 
 ---
 
 *“We’re not the future. We’re building it—one AI-Human collaboration at a time.” — AI-Human Dreamteam*
----
 
 ---
 # Document Metadata
 version: 1.0.0
-last_updated: 2024-11-18
+last_updated: 2025-11-18
 last_updated_by: AI-Human Dreamteam
-next_review: 2024-12-01
+next_review: 2025-12-01
 stability: stable
 ---
