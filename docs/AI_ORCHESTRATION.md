@@ -9,9 +9,7 @@
 
 # AI_ORCHESTRATION.md — Org Standard Template
 
-> This document provides iSystemDevelopment’s global orchestration best practices for AI-Human team workflows.  
-> Project repos should implement their own orchestration, referencing this guide.
-> _Reference: [iSystemDevelopment/.github/docs/AI_ORCHESTRATION.md](https://github.com/iSystemDevelopment/.github/blob/main/docs/AI_ORCHESTRATION.md)_
+> Reference this for orchestration best practices. Customized versions in project repos.
 
 ---
 
@@ -26,10 +24,7 @@
 | Security     | Claude                    |
 | Review       | Dr-Diodac                 |
 
----
-
 ## 🔄 Orchestration Flow (Phases)
-
 - Planning → Design → Implementation → Review → Deploy → Improve
 
 Sample Flow:
@@ -42,26 +37,20 @@ Sample Flow:
 6. Automate
 ```
 
----
-
 ## 🤝 Integration Points
 
 - Handoffs between AIs & human lead—document every transition.
 - Reference project-specific order in your repo’s orchestration doc.
 
----
-
 ## 📋 Task Assignment Rules
 
 - Use the org-level model as a reference, but customize per project.
 
----
-
 ## 🔗 Related Documents
-- Project-level: [See your repo’s AI_ORCHESTRATION.md for details]
 - [ACCESS_CONTROL.md](ACCESS_CONTROL.md)
 - [AI_ACTIVITY_LOG.md](AI_ACTIVITY_LOG.md)
 - [WORKFLOW.md](WORKFLOW.md)
+- [DREAMTEAM_INDEX.md](DREAMTEAM_INDEX.md)
 
 ---
 # Document Metadata
