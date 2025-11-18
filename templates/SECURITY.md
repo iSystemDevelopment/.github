@@ -1,42 +1,29 @@
-# 🛡️ Security Policy
+<!--
+╔═══════════════════════════════════════════════════════════════════╗
+║          🚀 DREAMTEAM SECURITY — ORG/PUBLIC REPO TEMPLATE         ║
+╠═══════════════════════════════════════════════════════════════════╣
+║ Org-level security policy and workflow. Claude is lead AI.       ║
+╚═══════════════════════════════════════════════════════════════════╝
+-->
 
-Welcome to the iSystem Development security policy. We take security seriously and appreciate your help in keeping our projects safe.
+# SECURITY.md — Org Template
 
-## Our Security Principles
-
-We are committed to:
-- **Security-first design** across all repositories
-- **Privacy by default** — no telemetry, analytics, or hidden data collection
-- **Safe operations** — all destructive or system-modifying code supports "dry run" or "what if" modes
-
-## Reporting Security Vulnerabilities
-
-If you discover a security vulnerability, we appreciate your responsible disclosure:
-
-- **Please do not** open public issues for security bugs
-- **Instead**, report via [GitHub Security Advisories](https://github.com/iSystemDevelopment/deep-clean-pro/security/advisories) or email us at [info@isystem.app](mailto:info@isystem.app)
-- Check each repository's README for specific reporting templates and details
-
-## Secure Coding Standards
-
-Our development practices include:
-- No hardcoded secrets, passwords, or tokens
-- Input validation and output sanitization
-- Least privilege principle in all operations
-- Required security testing (linters, static analysis, PSScriptAnalyzer where relevant)
-- Logs must exclude sensitive and personal data
-
-## Policy Enforcement
-
-We maintain security through:
-- Automated workflows that check for secrets, unsafe patterns, and license compliance
-- Human review for all critical infrastructure or security-impacting changes
-
-## Additional Resources
-
-- [AI_ORCHESTRATION.md](https://github.com/iSystemDevelopment/deep-clean-pro/blob/main/AI_ORCHESTRATION.md) — comprehensive developer and automation guidelines
-- Individual repository README files for project-specific details
+> Use this file for org/project security assurances and protocols.
 
 ---
 
-**Questions or security disclosures?** Contact us at [info@isystem.app](mailto:info@isystem.app)
+## Dreamteam Security Highlights
+
+- Entries logged in [../docs/AI_ACTIVITY_LOG.md](../docs/AI_ACTIVITY_LOG.md)
+- Credential alerts analyzed/resolved via [../alerts/CREDENTIAL_ALERT_ANALYSIS.md](../alerts/CREDENTIAL_ALERT_ANALYSIS.md) and [../alerts/CREDENTIAL_EXPOSURE_RESOLUTION.md](../alerts/CREDENTIAL_EXPOSURE_RESOLUTION.md)
+- Claude has override authority for security reviews ([../docs/ACCESS_CONTROL.md](../docs/ACCESS_CONTROL.md))
+
+---
+
+# Version and Metadata
+version: 1.0.0
+last_updated: 2025-11-18
+last_updated_by: AI-Human Dreamteam
+next_review: 2025-12-01
+stability: stable
+---
