@@ -9,15 +9,11 @@
 
 # AI_ACTIVITY_LOG.md — Org Standard Template
 
-> **Purpose:**  
-> Track all significant actions, handoffs, and outcomes in the AI-Human Dreamteam workflow.  
-> _Each project repo should maintain its own live activity log.  
-> Reference: [iSystemDevelopment/.github/docs/AI_ACTIVITY_LOG.md](https://github.com/iSystemDevelopment/.github/blob/main/docs/AI_ACTIVITY_LOG.md)_
+> _For project repo logs, see that repo’s AI_ACTIVITY_LOG.md. Use this as a best-practice template._
 
 ---
 
 ## 📝 Log Entry Format (YAML sample)
-
 ```yaml
 - timestamp: 2025-11-18T14:45:00Z
   ai_system: Claude
@@ -33,8 +29,6 @@
   notes: "Google Sheets integration required next"
 ```
 
----
-
 ## 📊 Activity Types
 
 | Type              | Example                                |
@@ -45,8 +39,6 @@
 | security-review   | Vulnerability scan, auth, sanitization  |
 | documentation     | Docs, README, guide                     |
 | bugfix/refactor   | Fixes, performance, code cleanup        |
-
----
 
 ## 🔄 Daily Summary Template
 
@@ -59,10 +51,10 @@ by_ai:
 ```
 
 ## 🔗 Related Documents
-- Project-level: [See your repo’s AI_ACTIVITY_LOG.md for details]
 - [ACCESS_CONTROL.md](ACCESS_CONTROL.md)
 - [AI_ORCHESTRATION.md](AI_ORCHESTRATION.md)
 - [WORKFLOW.md](WORKFLOW.md)
+- [DREAMTEAM_INDEX.md](DREAMTEAM_INDEX.md)
 
 ---
 # Document Metadata
