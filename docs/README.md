@@ -35,6 +35,9 @@ Org-level templates for contributors and AI-assisted workflows.
 | [../templates/CONTRIBUTING.md](../templates/CONTRIBUTING.md) | Contribution guidelines |
 | [../templates/SECURITY.md](../templates/SECURITY.md) | Security reporting |
 | [../templates/PULL_REQUEST_TEMPLATE.md](../templates/PULL_REQUEST_TEMPLATE.md) | PR template |
+| [../workflows/README.md](../workflows/README.md) | CI / security workflows |
+| [../scripts/README.md](../scripts/README.md) | Manual sanitize export (optional) |
+| [../LICENSE.md](../LICENSE.md) | Org proprietary license |
 
 ---
 

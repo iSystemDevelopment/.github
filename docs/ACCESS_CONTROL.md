@@ -21,7 +21,7 @@ Least privilege for repos, VPS, and client data. Customize per project.
 |-------|----------|-------|
 | **Public OSS** | deep-clean-pro, Wordpress | No secrets ever; MIT license |
 | **Public proprietary** | Some product sites via deploy package | Sanitized only |
-| **Private SSOT** | Client projects, firmware source | No public fork; sanitize pipeline for excerpts |
+| **Private SSOT** | Client projects, firmware source | Local/private backup only; manual sanitize before any public excerpt |
 
 ---
 

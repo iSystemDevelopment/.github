@@ -20,28 +20,34 @@ jobs:
           node-version: 20
 
       - name: Install dependencies
-        run: npm ci
+        run: |
+          if [ -f package.json ]; then
+            npm ci
+          else
+            echo "No package.json — skipping Node CI for this repo."
+            exit 0
+          fi
 
       - name: Lint
         run: |
-          if [ -f package.json ] && npm run | grep -q "lint"; then
+          if [ -f package.json ] && npm run 2>/dev/null | grep -q " lint"; then
             npm run lint
           else
-            echo "No lint script defined, skipping."
+            echo "No lint script — skipping."
           fi
 
       - name: Test
         run: |
-          if [ -f package.json ] && npm run | grep -q "test"; then
-            npm test -- --ci || npm test || echo "Tests failed"; exit 1
+          if [ -f package.json ] && npm run 2>/dev/null | grep -q " test"; then
+            npm test -- --ci 2>/dev/null || npm test
           else
-            echo "No test script defined, skipping."
+            echo "No test script — skipping."
           fi
 
       - name: Build
         run: |
-          if [ -f package.json ] && npm run | grep -q "build"; then
+          if [ -f package.json ] && npm run 2>/dev/null | grep -q " build"; then
             npm run build
           else
-            echo "No build script defined, skipping."
+            echo "No build script — skipping."
           fi

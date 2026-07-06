@@ -65,7 +65,7 @@ No direct commits to `main` for shared repos unless emergency hotfix (document i
 ## Security workflow
 
 - Pre-commit: no `.env`, keys, or client PII  
-- Public sync: run sanitizer workflows where configured  
+- Public excerpts: run [scripts/sanitize-sync.sh](../scripts/sanitize-sync.sh) locally before publishing from private backups  
 - Credentials: VPS / GitHub secrets only  
 
 ---

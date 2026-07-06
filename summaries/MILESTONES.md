@@ -21,7 +21,7 @@ Track completion here; log significant AI-assisted sessions in [AI_ACTIVITY_LOG.
 ## Later
 
 - [ ] isystem.cloud MVP scope defined
-- [ ] Business Suite inventory module (replaces legacy GSL Smart Inventory Builder)
+- [ ] Business Suite inventory module (iSystem platform)
 
 ---
 

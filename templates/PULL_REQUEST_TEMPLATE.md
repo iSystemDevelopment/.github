@@ -1,37 +1,30 @@
-<!--
-╔═══════════════════════════════════════════════════════════════════╗
-║      🚀 DREAMTEAM PR TEMPLATE — ORG/PUBLIC REPO TEMPLATE          ║
-╠═══════════════════════════════════════════════════════════════════╣
-║ PR etiquette for Dreamteam workflow and roles.                   ║
-╚═══════════════════════════════════════════════════════════════════╝
--->
+## Summary
 
-# Pull Request Template — Org Dreamteam
+<!-- What changed and why (1–3 sentences) -->
 
-> Use this for AI/Human-collab PRs. Reference [../docs/AI_ORCHESTRATION.md](../docs/AI_ORCHESTRATION.md).
+## Type
 
----
+- [ ] Feature
+- [ ] Bug fix
+- [ ] Docs
+- [ ] Refactor / chore
 
-## PR Checklist
+## Test plan
 
-- [ ] Clearly describe feature/fix and workflow
-- [ ] Tag AI/human involvement (see [../docs/ACCESS_CONTROL.md](../docs/ACCESS_CONTROL.md))
-- [ ] Reference issue, resolution, and activity log as needed
+- [ ] Built or tested locally
+- [ ] Web: checked desktop + mobile view modes (if UI)
+- [ ] No secrets or client data in diff
 
----
+## AI assistance
 
-## Related Docs
+- [ ] Human-only
+- [ ] AI-assisted (describe tools used, optional)
 
-- [../docs/AI_ORCHESTRATION.md](../docs/AI_ORCHESTRATION.md)
-- [../docs/ACCESS_CONTROL.md](../docs/ACCESS_CONTROL.md)
-- [../docs/AI_ACTIVITY_LOG.md](../docs/AI_ACTIVITY_LOG.md)
-- [CONTRIBUTING.md](CONTRIBUTING.md)
+## Links
+
+- Issue / milestone:
+- Related docs:
 
 ---
-# Document Metadata
-version: 1.0.0
-last_updated: 2025-11-18
-last_updated_by: AI-Human Dreamteam
-next_review: 2025-12-01
-stability: stable
----
+
+Maintainer review required before merge. See [CONTRIBUTING.md](CONTRIBUTING.md) and [docs/WORKFLOW.md](../docs/WORKFLOW.md).

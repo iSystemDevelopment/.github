@@ -20,7 +20,7 @@ High-level phases. Adjust dates in [MILESTONES.md](MILESTONES.md) as work lands.
 
 - Live device webhook path for iMETER (bench → JSON → data console).
 - WireViz / certificate pipeline improvements.
-- Business Suite inventory tooling (successor to archived Smart Inventory Builder).
+- Business Suite inventory & BOM tooling (new implementation on iSystem platform).
 
 ## Phase 4 — Cloud & API *(deferred)*
 

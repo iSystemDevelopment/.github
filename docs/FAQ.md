@@ -28,12 +28,6 @@ Human lead defines scope; AI helps implement and document. See [AI_ORCHESTRATION
 
 ---
 
-## Smart Inventory Builder / GSL?
-
-Historical client project — archived in private repo. Not featured on public org profile.
-
----
-
 ## Security?
 
 No credentials in git. Report via [templates/SECURITY.md](../templates/SECURITY.md).
