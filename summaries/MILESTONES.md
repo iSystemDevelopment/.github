@@ -1,36 +1,30 @@
-<!--
-╔═══════════════════════════════════════════════════════════════════╗
-║           🚀 DREAMTEAM MILESTONES — ORG TEMPLATE                  ║
-╠═══════════════════════════════════════════════════════════════════╣
-║ Org-level/project milestones. Track with activity log.           ║
-╚═══════════════════════════════════════════════════════════════════╝
--->
+# MILESTONES — iSystem Development (2026)
 
-# MILESTONES.md — Org Template
-
-> Track key milestones for org/projects here.
+Track completion here; log significant AI-assisted sessions in [AI_ACTIVITY_LOG.md](../docs/AI_ACTIVITY_LOG.md).
 
 ---
 
-## Sample Milestones
+## Q1 2026
 
-- Smart Inventory Builder: Initial launch (Q1)
-- Dreamteam Slack bot operational (Q2)
-- 100% credential mitigation rate ([../alerts/CREDENTIAL_EXPOSURE_RESOLUTION.md](../alerts/CREDENTIAL_EXPOSURE_RESOLUTION.md))
+- [x] iMETER v2 web — hero layout, data console grid, CSS cache `v2.0.00.4`
+- [x] Org docs rewrite (`.github/docs/`, profile README, wiki source)
+- [x] `isystem-deploy` platform docs (layout, PWA, Cloudflare, domains)
+- [ ] Push `.github`, `.github.wiki`, and `github.io` after local cleanup
+- [ ] diodac.org DNS + VPS deploy
+
+## Q2 2026
+
+- [ ] iMETER live device webhook + certificate export path
+- [ ] Infinity / iDrum cache and view-mode audit against SSOT
+- [ ] Org repo pins and public demo links verified
+
+## Later
+
+- [ ] isystem.cloud MVP scope defined
+- [ ] Business Suite inventory module (replaces legacy GSL Smart Inventory Builder)
 
 ---
 
-## Related Docs
+## Related
 
-- [GOALS.md](GOALS.md)
-- [ROADMAP.md](ROADMAP.md)
-- [../docs/AI_ACTIVITY_LOG.md](../docs/AI_ACTIVITY_LOG.md)
-
----
-# Document Metadata
-version: 1.0.0
-last_updated: 2025-11-18
-last_updated_by: AI-Human Dreamteam
-next_review: 2025-12-01
-stability: stable
----
+- [GOALS.md](GOALS.md) · [ROADMAP.md](ROADMAP.md)

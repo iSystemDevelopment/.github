@@ -1,38 +1,31 @@
-<!--
-╔═══════════════════════════════════════════════════════════════════╗
-║              🚀 DREAMTEAM GOALS — ORG TEMPLATE                    ║
-╠═══════════════════════════════════════════════════════════════════╣
-║ Org-level/project goals. Adapt for project milestones.           ║
-╚═══════════════════════════════════════════════════════════════════╝
--->
+# GOALS — iSystem Development (2026)
 
-# GOALS.md — Org Template
-
-> List and track goals for your org/project using Dreamteam workflow.
+Org-level goals. Detailed platform work lives in [isystem-deploy/docs](https://github.com/iSystemDevelopment/isystem-deploy/tree/main/docs).
 
 ---
 
-## Sample Goals
+## Product & platform
 
-- Deploy Smart Inventory Builder to GSL Power by Q4
-- Integrate all CI/CD steps with AI-human review ([../docs/WORKFLOW.md](../docs/WORKFLOW.md))
-- Maintain >80% test coverage across repos
-- Weekly AI-Human team retrospectives ([../docs/AI_ACTIVITY_LOG.md](../docs/AI_ACTIVITY_LOG.md))
+- Ship **iMETER v2** as production-ready bench QA (18-channel Kelvin, data console, webhook JSON).
+- Maintain **SSOT docs** for web layout, PWA, Cloudflare cache, and domain portfolio in `isystem-deploy`.
+- Launch **diodac.org** engineering portfolio and keep **isystem.app** as the product hub.
+- Harden **InfinityApp**, **iDrum**, and Octopus PWAs with guarded view modes and cache-safe deploys.
+
+## Engineering & quality
+
+- Human-led PR review on every merge; AI assists implementation and documentation only.
+- No secrets in git or chat; follow [SECURITY.md](../templates/SECURITY.md).
+- Version static assets (`?v=`) and align service-worker cache names on every web release.
+
+## Open source & community
+
+- Keep **deep-clean-pro** and **Wordpress** plugins documented and MIT-licensed.
+- Publish contributor docs in `.github/docs/` with wiki mirror kept in sync.
 
 ---
 
-## Related Docs
+## Related
 
-- [../docs/WORKFLOW.md](../docs/WORKFLOW.md)
-- [../docs/AI_ACTIVITY_LOG.md](../docs/AI_ACTIVITY_LOG.md)
-- [MILESTONES.md](MILESTONES.md)
-- [ROADMAP.md](ROADMAP.md)
-
----
-# Document Metadata
-version: 1.0.0
-last_updated: 2025-11-18
-last_updated_by: AI-Human Dreamteam
-next_review: 2025-12-01
-stability: stable
----
+- [ROADMAP.md](ROADMAP.md) · [MILESTONES.md](MILESTONES.md)
+- [docs/ENGINEERING_PRINCIPLES.md](../docs/ENGINEERING_PRINCIPLES.md)
+- [docs/WORKFLOW.md](../docs/WORKFLOW.md)
