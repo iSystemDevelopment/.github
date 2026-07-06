@@ -24,7 +24,7 @@ Human lead defines scope; AI helps implement and document. See [AI_ORCHESTRATION
 
 ## Where are web/PWA standards?
 
-[isystem-deploy/docs](https://github.com/iSystemDevelopment/isystem-deploy/tree/main/docs) — layout, PWA, Cloudflare cache, domains.
+Live products and demos: [isystem.app](https://isystem.app). Engineering standards: private monorepo `docs/` (org members).
 
 ---
 

@@ -27,18 +27,17 @@ Human engineering leads every product; AI tools accelerate design, review, and d
 
 ## Engineering standards
 
-Documented SSOT in [isystem-deploy](https://github.com/iSystemDevelopment/isystem-deploy):
+Documented SSOT in private monorepo `isystem-codebase` (public excerpts via MIT repos):
 
-- [Web layout & responsive](https://github.com/iSystemDevelopment/isystem-deploy/blob/main/docs/web-layout-standard.md)
-- [PWA (Chrome + iOS)](https://github.com/iSystemDevelopment/isystem-deploy/blob/main/docs/pwa-standard.md)
-- [Cloudflare cache](https://github.com/iSystemDevelopment/isystem-deploy/blob/main/docs/cloudflare-cache-standard.md)
-- [Domain portfolio](https://github.com/iSystemDevelopment/isystem-deploy/blob/main/docs/domain-portfolio-ssot.md)
+- Web layout, PWA, Cloudflare — ship in product repos / org docs when published
+- Live product hub: [isystem.app](https://isystem.app)
 
 ## Contributor docs
 
 | Doc | Link |
 |-----|------|
 | Index | [docs/README.md](https://github.com/iSystemDevelopment/.github/blob/main/docs/README.md) |
+| Engineering principles | [docs/ENGINEERING_PRINCIPLES.md](https://github.com/iSystemDevelopment/.github/blob/main/docs/ENGINEERING_PRINCIPLES.md) |
 | Onboarding | [docs/ONBOARDING.md](https://github.com/iSystemDevelopment/.github/blob/main/docs/ONBOARDING.md) |
 | AI orchestration | [docs/AI_ORCHESTRATION.md](https://github.com/iSystemDevelopment/.github/blob/main/docs/AI_ORCHESTRATION.md) |
 | Wiki (mirror) | [github.com/.../wiki](https://github.com/iSystemDevelopment/.github/wiki) · sync from [`wiki/`](https://github.com/iSystemDevelopment/.github/tree/main/wiki) |
@@ -49,7 +48,7 @@ Documented SSOT in [isystem-deploy](https://github.com/iSystemDevelopment/isyste
 
 | Repo | Description |
 |------|-------------|
-| [isystem-deploy](https://github.com/iSystemDevelopment/isystem-deploy) | VPS deploy, nginx, web apps, platform docs |
+| [isystem-codebase](https://github.com/iSystemDevelopment/isystem-codebase) | Private monorepo — platform, products, deploy (org members) |
 | [deep-clean-pro](https://github.com/iSystemDevelopment/deep-clean-pro) | Windows optimization suite (MIT) |
 | [Wordpress](https://github.com/iSystemDevelopment/Wordpress) | Plugins & Spectra companion theme (MIT) |
 | [diodac_audio](https://github.com/iSystemDevelopment/diodac_audio) | Browser ↔ native MIDI bridge |

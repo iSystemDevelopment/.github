@@ -23,7 +23,7 @@ No direct commits to `main` for shared repos unless emergency hotfix (document i
 
 - Issue or brief written outcome  
 - Touch SSOT docs if architecture changes  
-- For web: confirm breakpoints and deploy target (`isystem-deploy` path)
+- For web: confirm breakpoints; deploy via `isystem-codebase/scripts/scp-*.ps1`
 
 ### 2. Implement
 
@@ -39,7 +39,7 @@ No direct commits to `main` for shared repos unless emergency hotfix (document i
 
 ### 4. Deploy
 
-- Static: `scp-*.ps1` from `isystem-deploy/scripts`  
+- Static: `scp-*.ps1` from private `isystem-codebase/scripts`  
 - Post-deploy: hard refresh / cache bust verify  
 - Record in project CHANGELOG if maintained  
 
@@ -56,7 +56,7 @@ No direct commits to `main` for shared repos unless emergency hotfix (document i
 |-----------|------------------|
 | Greenfield feature | Plan doc → AI-assisted implementation → human review |
 | Bug fix | Repro → root cause → minimal fix → regression check |
-| Deploy / infra | `isystem-deploy`, nginx snippets, Cloudflare rules doc |
+| Deploy / infra | Private `isystem-codebase`, nginx in `platform/nginx/`, Cloudflare rules in `docs/` |
 | WordPress plugin | PHP in `Wordpress/plugins/`, test on staging WP |
 | Firmware | Product repo SSOT; webhook schema unchanged without version bump |
 

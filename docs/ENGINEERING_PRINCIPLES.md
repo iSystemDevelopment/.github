@@ -1,47 +1,29 @@
 # Engineering principles
 
-DIODAC ELECTRONICS / iSystem Development — how we build software.
-
----
-
-## Human-led, AI-accelerated
-
-- **Dr. Diodac (human lead)** owns architecture, product decisions, security sign-off, and client commitments.
-- **AI assistants** (IDE agents, chat models) accelerate implementation, review, tests, and documentation.
-- We do not brand individual model vendors on public pages; we document *workflow*, not marketing.
+1. **Human-led, AI-accelerated** — lead owns architecture and merge; AI drafts under direction.
+2. **Document SSOT** — platform rules in private `isystem-codebase/docs/`; product rules per folder.
+3. **Security first** — no secrets in git; report via [SECURITY.md](../templates/SECURITY.md).
+4. **Minimal diffs** — solve the stated problem; no speculative abstraction.
+5. **No resurrection** — retired hosts, repos, and patterns stay retired (monorepo `RETIRED_REGISTRY.md`).
+6. **Always report** — non-trivial AI work ends with: when, files/lines, why, how, risks, verification.
 
 ---
 
 ## Quality bar
 
-1. **Ship working systems** — demos and production paths must be testable.
-2. **Document SSOT** — platform rules in `isystem-deploy/docs/`; project rules in each repo.
-3. **Security first** — no secrets in git; sanitize before public sync; report via [SECURITY.md](../templates/SECURITY.md).
-4. **Responsive & installable web** — public apps follow PWA + layout standards.
-5. **Minimal scope** — fix the root cause; avoid drive-by refactors.
+| Good | Rejected ("slop") |
+|------|-------------------|
+| 5-line fix for root cause | 100-line refactor "while we're here" |
+| Matches existing naming/style | New helper for one use |
+| Cites deploy-map paths | Guessed VPS paths |
+| Change report with line ranges | "Updated some files" |
 
 ---
 
-## Domains
+## Promotion path
 
-| Domain | Purpose |
-|--------|---------|
-| [isystem.app](https://isystem.app) | Products & PWAs |
-| [diodac.org](https://diodac.org) | Engineering portfolio |
-| [isystem.cloud](https://isystem.cloud) | Services & API (roadmap) |
+Private draft → review → public MIT slice or org doc. Never auto-sync private monorepo to public GitHub.
 
 ---
 
-## Collaboration
-
-- Significant AI-assisted sessions logged per [AI_ACTIVITY_LOG.md](AI_ACTIVITY_LOG.md).
-- Handoffs documented when switching tools or agents mid-task.
-- Private client work stays in private repos; public repos are sanitized.
-
----
-
-## Related
-
-- [ONBOARDING.md](ONBOARDING.md)
-- [AI_ORCHESTRATION.md](AI_ORCHESTRATION.md)
-- [WORKFLOW.md](WORKFLOW.md)
+*Maintainer: Dr. Diodac*

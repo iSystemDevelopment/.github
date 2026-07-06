@@ -10,7 +10,7 @@ Welcome to **iSystem Development**. This guide gets you productive in one sessio
 |------|--------|
 | GitHub org membership | Request from [@Dr-Diodac](https://github.com/Dr-Diodac) |
 | Private repos | Granted per project; default is least privilege |
-| VPS / deploy | Documented in [isystem-deploy](https://github.com/iSystemDevelopment/isystem-deploy); SSH keys via lead only |
+| VPS / deploy | Private `isystem-codebase` monorepo (org members); SSH keys via lead only |
 
 ---
 
@@ -19,7 +19,7 @@ Welcome to **iSystem Development**. This guide gets you productive in one sessio
 1. [ENGINEERING_PRINCIPLES.md](ENGINEERING_PRINCIPLES.md) — how we work  
 2. [WORKFLOW.md](WORKFLOW.md) — branches, review, deploy  
 3. [AI_ORCHESTRATION.md](AI_ORCHESTRATION.md) — AI-assisted sessions  
-4. [isystem-deploy docs](https://github.com/iSystemDevelopment/isystem-deploy/tree/main/docs) — web/PWA/cache standards (if touching `*.isystem.app`)
+4. Live products on [isystem.app](https://isystem.app) — web/PWA standards in private monorepo `docs/` (if touching `*.isystem.app`)
 
 ---
 
@@ -27,7 +27,7 @@ Welcome to **iSystem Development**. This guide gets you productive in one sessio
 
 | Repo | Role |
 |------|------|
-| [isystem-deploy](https://github.com/iSystemDevelopment/isystem-deploy) | VPS static apps, nginx, platform SSOT |
+| Private monorepo | Platform, products, `scripts/scp-*.ps1` (org members) |
 | [.github](https://github.com/iSystemDevelopment/.github) | Org profile, templates, this docs folder |
 | [deep-clean-pro](https://github.com/iSystemDevelopment/deep-clean-pro) | Open-source Windows tools (MIT) |
 | [Wordpress](https://github.com/iSystemDevelopment/Wordpress) | WP plugins & theme (MIT) |
