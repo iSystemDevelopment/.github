@@ -17,6 +17,8 @@ Contributor docs for the **iSystemDevelopment** GitHub organization.
 | [ENGINEERING_PRINCIPLES.md](ENGINEERING_PRINCIPLES.md) | Quality bar, no slop |
 | [AI_ORCHESTRATION.md](AI_ORCHESTRATION.md) | AI session workflow + change reports |
 | [WORKFLOW.md](WORKFLOW.md) | Branches, review, deploy |
+| [SEO_ROCKET.md](SEO_ROCKET.md) | Meta, OG, icons, social launch bundle |
+| [VISUAL_CONSISTENCY.md](VISUAL_CONSISTENCY.md) | Dark UI, mobile, TIP chrome |
 | [ACCESS_CONTROL.md](ACCESS_CONTROL.md) | Permissions (leads) |
 | [FAQ.md](FAQ.md) | Common questions |
 

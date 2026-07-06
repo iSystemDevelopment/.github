@@ -44,6 +44,9 @@ How we use AI **without** replacing human judgment.
 
 ## Related
 
+- [foundation-index.md](foundation-index.md)
+- [promotion-workflow.md](promotion-workflow.md)
+- [public-export-checklist.md](public-export-checklist.md)
 - [WORKFLOW.md](WORKFLOW.md)  
 - [ENGINEERING_PRINCIPLES.md](ENGINEERING_PRINCIPLES.md)  
 - [ONBOARDING.md](ONBOARDING.md)
