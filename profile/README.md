@@ -1,78 +1,64 @@
-<!--
-╔═══════════════════════════════════════════════════════════════════╗
-║                    🚀 AI-HUMAN DREAMTEAM 🚀                      ║
-║      Human Architect: Dr-Diodac | AI Team: Claude, ChatGPT Pro,   ║
-║      Gemini Ultra, Copilot                                        ║
-╠═══════════════════════════════════════════════════════════════════╣
-║    Building revolutionary systems with AI-Human collaboration     ║
-╚═══════════════════════════════════════════════════════════════════╝
--->
+[![License: Proprietary](https://img.shields.io/badge/License-Proprietary-red.svg)](https://github.com/iSystemDevelopment/.github/blob/main/LICENSE.md)
 
-[![License: Proprietary](https://img.shields.io/badge/license-Proprietary-red.svg)](../LICENSE)
+# iSystem Development
 
-# iSystem Development 🚀 — Home of the AI-Human Dreamteam
+> **Precision instruments & browser-native tools — DIODAC ELECTRONICS**
 
-Welcome to iSystem Development—leading the way in AI-Human collaboration and the Second Technology Revolution.
+Human engineering leads every product; AI tools accelerate design, review, and documentation as part of our standard workflow.
+
+| Surface | Role |
+|---------|------|
+| [isystem.app](https://isystem.app) | Product hub — PWAs, demos, support |
+| [diodac.org](https://diodac.org) | Dr. Diodac — engineering portfolio |
+| [isystem.cloud](https://isystem.cloud) | Cloud services & API (roadmap) |
 
 ---
 
-## 🌟 Manifesto: The AI-Human Dreamteam Revolution
+## What we build
 
-**We believe the future is not human OR AI, but human AND AI.**  
-Every project we deliver is powered by Dr-Diodac and the AI-Human Dreamteam: Claude, ChatGPT Pro, Gemini Ultra, and Copilot.
-
-Our mission: Revolutionize technology, productivity, and innovation by orchestrating humans and specialized AIs as one super-team.
-
----
-
-## 🏆 Featured Project: Smart Inventory Builder
-
-- **Client:** GSL Power Ltd
-- **Team:** Full AI-Human Dreamteam collaboration
-- **Status:** Production deployment ready
-
-Learn more: [MANIFESTO.md](../docs/MANIFESTO.md) | [WORKFLOW.md](../docs/WORKFLOW.md)
+| Area | Examples |
+|------|----------|
+| **Bench & embedded** | [iMETER](https://imeter.isystem.app) — 18-channel Kelvin QA, ESP32-S3, webhook JSON |
+| **Web audio & MIDI** | [InfinityApp](https://infinity.isystem.app), [iDrum](https://idrum.isystem.app), Octopus, [diodac_audio](https://github.com/iSystemDevelopment/diodac_audio) |
+| **Business & media** | Multi-tenant API, OptiByte pipeline, inventory/BOM tooling |
+| **Open source** | [Deep Clean Pro](https://github.com/iSystemDevelopment/deep-clean-pro) (MIT), [WordPress plugins](https://github.com/iSystemDevelopment/Wordpress) (MIT) |
 
 ---
 
-## 📚 Documentation Index
+## Engineering standards
 
-- [WORKFLOW.md](../docs/WORKFLOW.md)
-- [ACCESS_CONTROL.md](../docs/ACCESS_CONTROL.md)
-- [AI_ORCHESTRATION.md](../docs/AI_ORCHESTRATION.md)
-- [AI_ACTIVITY_LOG.md](../docs/AI_ACTIVITY_LOG.md)
-- [FAQ.md](../docs/FAQ.md)
-- [HELP.md](../docs/HELP.md)
-- [DREAMTEAM_INDEX.md](../DREAMTEAM_INDEX.md)
+Documented SSOT in [isystem-deploy](https://github.com/iSystemDevelopment/isystem-deploy):
 
-**See our [Wiki](https://github.com/iSystemDevelopment/.github/wiki) for onboarding, FAQ, collaboration, and technical help.**
+- [Web layout & responsive](https://github.com/iSystemDevelopment/isystem-deploy/blob/main/docs/web-layout-standard.md)
+- [PWA (Chrome + iOS)](https://github.com/iSystemDevelopment/isystem-deploy/blob/main/docs/pwa-standard.md)
+- [Cloudflare cache](https://github.com/iSystemDevelopment/isystem-deploy/blob/main/docs/cloudflare-cache-standard.md)
+- [Domain portfolio](https://github.com/iSystemDevelopment/isystem-deploy/blob/main/docs/domain-portfolio-ssot.md)
 
----
-
-## 🤝 Contact & Join Us
-
-- **Lead:** Arkadiusz (Dr-Diodac)
-- **Email:** info@isystem.app
-- **GitHub:** [Dr-Diodac](https://github.com/Dr-Diodac)
-- **Organisation:** [iSystemDevelopment](https://github.com/iSystemDevelopment)
+Contributors: [org wiki](https://github.com/iSystemDevelopment/.github/wiki) · [Onboarding](https://github.com/iSystemDevelopment/.github/blob/main/docs/ONBOARDING.md) · [AI orchestration](https://github.com/iSystemDevelopment/.github/blob/main/docs/AI_ORCHESTRATION.md)
 
 ---
 
-## 🌐 Quick Links
+## Repositories
 
-- [HTML Documentation Preview](../docs/html/index.html) _(Coming soon)_
-- [Live ChatBot Help](#) _(Setup instructions in MANIFESTO.md)_
-- [Slack Integration Setup](../docs/SLACK_INTEGRATION.md) _(Coming soon)_
+| Repo | Description |
+|------|-------------|
+| [isystem-deploy](https://github.com/iSystemDevelopment/isystem-deploy) | VPS deploy, nginx, web apps, platform docs |
+| [deep-clean-pro](https://github.com/iSystemDevelopment/deep-clean-pro) | Windows optimization suite (MIT) |
+| [Wordpress](https://github.com/iSystemDevelopment/Wordpress) | Plugins & Spectra companion theme (MIT) |
+| [diodac_audio](https://github.com/iSystemDevelopment/diodac_audio) | Browser ↔ native MIDI bridge |
+
+Live demos: [imeter.isystem.app](https://imeter.isystem.app) · [infinity.isystem.app](https://infinity.isystem.app) · [idrum.isystem.app](https://idrum.isystem.app)
 
 ---
 
-*“We’re not the future. We’re building it—one AI-Human collaboration at a time.” — AI-Human Dreamteam*
+## Contact
+
+**Lead:** Arkadiusz (Dr. Diodac)  
+**Email:** [diodac.electronics@gmail.com](mailto:diodac.electronics@gmail.com) · [info@isystem.app](mailto:info@isystem.app)  
+**GitHub:** [@Dr-Diodac](https://github.com/Dr-Diodac)
+
+Security: [SECURITY.md](https://github.com/iSystemDevelopment/.github/blob/main/templates/SECURITY.md)
 
 ---
-# Document Metadata
-version: 1.0.0
-last_updated: 2025-11-18
-last_updated_by: AI-Human Dreamteam
-next_review: 2025-12-01
-stability: stable
----
+
+© DIODAC ELECTRONICS / iSystem Development. Proprietary unless a repository declares another license.
