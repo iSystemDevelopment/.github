@@ -1,62 +1,83 @@
-<!--
-╔═══════════════════════════════════════════════════════════════════╗
-║             🚀 AI-HUMAN DREAMTEAM ORCHESTRATION                  ║
-╠═══════════════════════════════════════════════════════════════════╣
-║   STANDARD TEMPLATE — iSystemDevelopment ORG LEVEL               ║
-║   For projects: Implement your workflows referencing this model. ║
-╚═══════════════════════════════════════════════════════════════════╝
--->
+# AI orchestration — org standard
 
-# AI_ORCHESTRATION.md — Org Standard Template
-
-> Reference this for orchestration best practices. Customized versions in project repos.
+How we use AI assistants **without** replacing human judgment. Copy and adapt per project repo.
 
 ---
 
-## 🎭 AI Roles Overview
+## Roles
 
-| Role         | Typical Owner              |
-|--------------|---------------------------|
-| Strategy     | Dr-Diodac, ChatGPT Pro    |
-| Architecture | Claude, Gemini Ultra      |
-| Implementation| Claude, Copilot          |
-| Integration  | Gemini Ultra              |
-| Security     | Claude                    |
-| Review       | Dr-Diodac                 |
+| Role | Owner | Responsibility |
+|------|--------|----------------|
+| **Lead / architect** | Dr. Diodac | Scope, architecture, merge approval, client comms |
+| **Implementer** | Developer + AI agent | Code, tests, focused diffs |
+| **Reviewer** | Human (+ optional AI review) | Correctness, security, style |
+| **Documenter** | Developer + AI | README, SSOT, changelogs |
 
-## 🔄 Orchestration Flow (Phases)
-- Planning → Design → Implementation → Review → Deploy → Improve
+AI tools (Cursor, Claude, ChatGPT, Copilot, etc.) are **interchangeable implementers** — assign by task, not by brand loyalty.
 
-Sample Flow:
+---
+
+## Session workflow
+
 ```
-1. Discuss
-2. Design
-3. Review (AI + human)
-4. Implement
-5. Document
-6. Automate
+1. Define outcome   — user story or bug repro in writing
+2. Plan             — human confirms approach (Plan mode / design note)
+3. Implement        — small commits; match repo conventions
+4. Verify           — run tests, manual QA at 390 / 768 / 1400 px for web
+5. Document         — changelog, activity log if significant
+6. Review & merge   — human approves PR
 ```
 
-## 🤝 Integration Points
+---
 
-- Handoffs between AIs & human lead—document every transition.
-- Reference project-specific order in your repo’s orchestration doc.
+## Handoff rules
 
-## 📋 Task Assignment Rules
+When switching agents or humans mid-task:
 
-- Use the org-level model as a reference, but customize per project.
+1. Leave a short status block: **done / blocked / next step**.
+2. List files touched and commands run.
+3. Note deploy or env steps still required.
 
-## 🔗 Related Documents
-- [ACCESS_CONTROL.md](ACCESS_CONTROL.md)
-- [AI_ACTIVITY_LOG.md](AI_ACTIVITY_LOG.md)
-- [WORKFLOW.md](WORKFLOW.md)
-- [DREAMTEAM_INDEX.md](DREAMTEAM_INDEX.md)
+For private repos, log in project `AI_ACTIVITY_LOG.md` (optional for tiny fixes).
 
 ---
-# Document Metadata
-version: 1.0.0
-last_updated: 2025-11-18
-last_updated_by: AI-Human Dreamteam
-next_review: 2025-12-01
-stability: stable
+
+## What AI may do
+
+- Generate boilerplate, tests, docs, refactors under human direction  
+- Search and explain codebase  
+- Draft nginx, CSS view modes, deploy scripts from SSOT  
+
+## What AI must not do alone
+
+- Merge to `main` or deploy to production  
+- Add secrets or commit credentials  
+- Force-push or rewrite published history  
+- Change license headers without lead approval  
+
 ---
+
+## Commit & PR conventions
+
+- Commits: imperative mood, scoped message (`fix(data-console): table layout on mobile`).
+- AI-assisted work: optional trailer `Co-authored-by: Cursor <cursor@cursor.com>` or note in PR body.
+- PRs: fill template; link issue; include test plan.
+
+---
+
+## Product-specific standards
+
+Web work **must** follow [isystem-deploy docs](https://github.com/iSystemDevelopment/isystem-deploy/tree/main/docs):
+
+- Layout view modes (`web-layout-standard.md`)  
+- PWA + iOS (`pwa-standard.md`)  
+- Asset versioning + Cloudflare (`cloudflare-cache-standard.md`)  
+
+---
+
+## Related
+
+- [WORKFLOW.md](WORKFLOW.md)  
+- [ACCESS_CONTROL.md](ACCESS_CONTROL.md)  
+- [AI_ACTIVITY_LOG.md](AI_ACTIVITY_LOG.md)  
+- [ONBOARDING.md](ONBOARDING.md)

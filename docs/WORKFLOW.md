@@ -1,71 +1,77 @@
-<!--
-╔═══════════════════════════════════════════════════════════════════╗
-║          🚀 DREAMTEAM WORKFLOW — ORG TEMPLATE                    ║
-╠═══════════════════════════════════════════════════════════════════╣
-║   Use this for all org projects; adapt to repo per deployment.   ║
-╚═══════════════════════════════════════════════════════════════════╝
--->
+# Development workflow — org template
 
-# WORKFLOW.md — Org Standard (adapt in repo)
-
-> For customized workflows, see your project repo’s WORKFLOW.md  
-> Org-level reference, based on Claude/Copilot best-practice.
+Adapt in each project repository. Aligns with [AI_ORCHESTRATION.md](AI_ORCHESTRATION.md).
 
 ---
 
-## 🚀 Development Workflow
+## Branching
 
-### AI-Assisted Development Strategy
+| Branch | Use |
+|--------|-----|
+| `main` | Production-ready; protected |
+| `feature/*` | New work |
+| `fix/*` | Bug fixes |
+| `docs/*` | Documentation only |
 
-| Tool/Person | Primary Responsibilities | When to Use |
-|------------|-------------------------|------------|
-| **Claude** | Architecture, system design, complex algorithms, security audits, API integration, docs, review, CI/CD config | Planning, security/critical points, integrations |
-| **ChatGPT Pro** | Feature ideation, algorithm design, business logic, UX flows, problem decomposition | Early design/featurization |
-| **Gemini Ultra** | Google ecosystem architect, Apps Script, Google APIs, backend syncs | Google integrations/automation |
-| **Copilot** | Coding assistant, real-time completion, boilerplate, tests | Coding, quick tasks, CRUD |
-
----
-
-### Development Phases
-
-1. **Planning Phase**: AIs and human lead discuss architecture/design.  
-2. **Implementation Phase**: Feature branches, Copilot rapid dev, AI/dreamteam notation in commits.  
-3. **Review Phase**: Security audit, code review, public sync sanitization, integration test.  
-4. **Documentation Phase**: API endpoints, deployment guides, activity logs.
+No direct commits to `main` for shared repos unless emergency hotfix (document in activity log).
 
 ---
 
-## 📋 Project Roadmap (Template)
+## Phases
 
-- Initial deployment, integrations, enhancements, optimizations, advanced features
+### 1. Plan
+
+- Issue or brief written outcome  
+- Touch SSOT docs if architecture changes  
+- For web: confirm breakpoints and deploy target (`isystem-deploy` path)
+
+### 2. Implement
+
+- Smallest correct diff  
+- Match existing naming, types, and file layout  
+- Version CSS/JS with `?v=` when deploying static sites  
+
+### 3. Review
+
+- Self-review diff  
+- Security: no secrets, no broad `chmod 777`  
+- Web: check mobile + desktop layouts  
+
+### 4. Deploy
+
+- Static: `scp-*.ps1` from `isystem-deploy/scripts`  
+- Post-deploy: hard refresh / cache bust verify  
+- Record in project CHANGELOG if maintained  
+
+### 5. Document
+
+- Update README or SSOT when behaviour changes  
+- Org templates stay in `.github/docs/`  
 
 ---
 
-## 🔒 Security Workflow
+## Tooling matrix (guidance)
 
-- Sanitization, credential reviews, activity log check, secrets, .env files, access policies
+| Task type | Typical approach |
+|-----------|------------------|
+| Greenfield feature | Plan doc → AI-assisted implementation → human review |
+| Bug fix | Repro → root cause → minimal fix → regression check |
+| Deploy / infra | `isystem-deploy`, nginx snippets, Cloudflare rules doc |
+| WordPress plugin | PHP in `Wordpress/plugins/`, test on staging WP |
+| Firmware | Product repo SSOT; webhook schema unchanged without version bump |
 
 ---
 
-## 🤖 Success Metrics
+## Security workflow
 
-- Code quality, test coverage, speedup, handoff effectiveness, doc completeness
+- Pre-commit: no `.env`, keys, or client PII  
+- Public sync: run sanitizer workflows where configured  
+- Credentials: VPS / GitHub secrets only  
 
 ---
 
-## 🔗 Reference & Related Docs
-- [ACCESS_CONTROL.md](ACCESS_CONTROL.md)
-- [AI_ORCHESTRATION.md](AI_ORCHESTRATION.md)
-- [AI_ACTIVITY_LOG.md](AI_ACTIVITY_LOG.md)
-- [DREAMTEAM_INDEX.md](DREAMTEAM_INDEX.md)
+## Related
+
+- [ACCESS_CONTROL.md](ACCESS_CONTROL.md)  
+- [AI_ACTIVITY_LOG.md](AI_ACTIVITY_LOG.md)  
 - [FAQ.md](FAQ.md)
-- [HELP.md](HELP.md)
-
----
-# Document Metadata
-version: 1.0.0
-last_updated: 2025-11-18
-last_updated_by: AI-Human Dreamteam
-next_review: 2025-12-01
-stability: stable
----
