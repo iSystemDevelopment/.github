@@ -1,26 +1,46 @@
-<!--
-╔═══════════════════════════════════════════════════════════════════╗
-║              🚀 DREAMTEAM HELP — ORG TEMPLATE                     ║
-╠═══════════════════════════════════════════════════════════════════╣
-║ For all iSystemDevelopment projects; adapt per repo.             ║
-╚═══════════════════════════════════════════════════════════════════╝
--->
-
-# HELP.md — AI-Human Dreamteam (Org Standard)
+# Help & troubleshooting
 
 ---
-## Common Issues & Solutions
 
-- **Can't Access?** Check your GitHub rights, file an access request to your team lead.
-- **Real-time support?** Use Slack; see [SLACK_INTEGRATION.md](SLACK_INTEGRATION.md).
-- **Workflow broke?** Review [WORKFLOW.md](WORKFLOW.md), latest [AI_ACTIVITY_LOG.md](AI_ACTIVITY_LOG.md).
-- **Security alerts?** See [SECURITY.md](../templates/SECURITY.md) or ping Claude/Dr-Diodac.
+## Access & GitHub
+
+| Problem | Fix |
+|---------|-----|
+| Cannot see private repo | Request access from [@Dr-Diodac](https://github.com/Dr-Diodac) |
+| PR checks failing | Read workflow logs; fix lint/test; re-push |
+| Merge conflicts | Rebase on `main`; ask lead if unsure |
 
 ---
-# Document Metadata
-version: 1.0.0
-last_updated: 2025-11-18
-last_updated_by: AI-Human Dreamteam
-next_review: 2025-12-01
-stability: stable
+
+## Web / deploy (`isystem-deploy`)
+
+| Problem | Fix |
+|---------|-----|
+| Stale CSS on live site | Bump `?v=` on theme link; see [Cloudflare cache SSOT](https://github.com/iSystemDevelopment/isystem-deploy/blob/main/docs/cloudflare-cache-standard.md) |
+| Mobile layout broken | Check view-mode CSS guards — [web-layout-standard](https://github.com/iSystemDevelopment/isystem-deploy/blob/main/docs/web-layout-standard.md) |
+| Images 404 on VPS | `chmod 755` on `assets/`; verify nginx root |
+
+Deploy scripts: `isystem-deploy/scripts/scp-*.ps1`
+
 ---
+
+## AI sessions
+
+| Problem | Fix |
+|---------|-----|
+| Agent changed too much | Revert; restate minimal scope; reference SSOT doc |
+| Lost context | Paste handoff block per [AI_ORCHESTRATION.md](AI_ORCHESTRATION.md) |
+
+---
+
+## Security
+
+Suspected credential leak: rotate immediately, notify lead, follow [SECURITY.md](../templates/SECURITY.md).
+
+---
+
+## Still stuck?
+
+1. [FAQ.md](FAQ.md)  
+2. Email [diodac.electronics@gmail.com](mailto:diodac.electronics@gmail.com)  
+3. Org wiki: [Home](https://github.com/iSystemDevelopment/.github/wiki)

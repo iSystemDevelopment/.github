@@ -34,7 +34,14 @@ Documented SSOT in [isystem-deploy](https://github.com/iSystemDevelopment/isyste
 - [Cloudflare cache](https://github.com/iSystemDevelopment/isystem-deploy/blob/main/docs/cloudflare-cache-standard.md)
 - [Domain portfolio](https://github.com/iSystemDevelopment/isystem-deploy/blob/main/docs/domain-portfolio-ssot.md)
 
-Contributors: [org wiki](https://github.com/iSystemDevelopment/.github/wiki) · [Onboarding](https://github.com/iSystemDevelopment/.github/blob/main/docs/ONBOARDING.md) · [AI orchestration](https://github.com/iSystemDevelopment/.github/blob/main/docs/AI_ORCHESTRATION.md)
+## Contributor docs
+
+| Doc | Link |
+|-----|------|
+| Index | [docs/README.md](https://github.com/iSystemDevelopment/.github/blob/main/docs/README.md) |
+| Onboarding | [docs/ONBOARDING.md](https://github.com/iSystemDevelopment/.github/blob/main/docs/ONBOARDING.md) |
+| AI orchestration | [docs/AI_ORCHESTRATION.md](https://github.com/iSystemDevelopment/.github/blob/main/docs/AI_ORCHESTRATION.md) |
+| Wiki (mirror) | [github.com/.../wiki](https://github.com/iSystemDevelopment/.github/wiki) · sync from [`wiki/`](https://github.com/iSystemDevelopment/.github/tree/main/wiki) |
 
 ---
 

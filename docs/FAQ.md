@@ -1,40 +1,52 @@
-<!--
-╔═══════════════════════════════════════════════════════════════════╗
-║                 🚀 DREAMTEAM FAQ — ORG TEMPLATE                  ║
-╠═══════════════════════════════════════════════════════════════════╣
-║  Use/extend in each project repo! For org-wide best practices.   ║
-╚═══════════════════════════════════════════════════════════════════╝
--->
-
-# FAQ.md — AI-Human Dreamteam (Org Standard)
+# FAQ
 
 ---
-## What is the AI-Human Dreamteam?
-A blended team of humans and specialized AI agents collaborating via clear workflows and roles.
 
-## How do I join a Dreamteam project?
-1. Read [ONBOARDING.md](ONBOARDING.md).
-2. Review org docs: [ACCESS_CONTROL.md](ACCESS_CONTROL.md), [WORKFLOW.md](WORKFLOW.md), [AI_ORCHESTRATION.md](AI_ORCHESTRATION.md).
-3. Connect your Slack user (see [SLACK_INTEGRATION.md](SLACK_INTEGRATION.md)).
+## What is iSystem Development?
 
-## How do we document AI-assisted work?
-- All significant actions are logged: [AI_ACTIVITY_LOG.md](AI_ACTIVITY_LOG.md).
-- Use branch/commit notation with `[AI-assist: Claude]`, etc.
+DIODAC ELECTRONICS engineering org — bench instruments, browser apps, automation, and deploy tooling. See [org profile](../profile/README.md).
 
-## Need help or stuck?
-- See [HELP.md](HELP.md) or ping on Slack.
+---
+
+## How do I contribute?
+
+1. [ONBOARDING.md](ONBOARDING.md)  
+2. [WORKFLOW.md](WORKFLOW.md) + [templates/CONTRIBUTING.md](../templates/CONTRIBUTING.md)  
+3. Open a PR on the relevant repo  
+
+---
+
+## How do we use AI assistants?
+
+Human lead defines scope; AI helps implement and document. See [AI_ORCHESTRATION.md](AI_ORCHESTRATION.md). We do not require logging every autocomplete — only significant sessions ([AI_ACTIVITY_LOG.md](AI_ACTIVITY_LOG.md)).
+
+---
+
+## Where are web/PWA standards?
+
+[isystem-deploy/docs](https://github.com/iSystemDevelopment/isystem-deploy/tree/main/docs) — layout, PWA, Cloudflare cache, domains.
+
+---
+
+## Smart Inventory Builder / GSL?
+
+Historical client project — archived in private repo. Not featured on public org profile.
+
+---
 
 ## Security?
-- No credentials in public; security led by Claude.
+
+No credentials in git. Report via [templates/SECURITY.md](../templates/SECURITY.md).
+
+---
 
 ## Contact?
-- Dr-Diodac (info@isystem.app) or relevant project lead.
+
+**Dr. Diodac** — [diodac.electronics@gmail.com](mailto:diodac.electronics@gmail.com) · [info@isystem.app](mailto:info@isystem.app)
 
 ---
-# Document Metadata
-version: 1.0.0
-last_updated: 2025-11-18
-last_updated_by: AI-Human Dreamteam
-next_review: 2025-12-01
-stability: stable
----
+
+## Wiki vs docs folder?
+
+**Source of truth:** `docs/` in this repo.  
+**Wiki:** optional mirror for GitHub UI — sync from [`wiki/`](../wiki/). See [wiki/README.md](../wiki/README.md).

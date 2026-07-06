@@ -1,44 +1,39 @@
-<!--
-╔═══════════════════════════════════════════════════════════════════╗
-║         🚀 DREAMTEAM CONTRIBUTING — ORG/PUBLIC REPO TEMPLATE      ║
-╠═══════════════════════════════════════════════════════════════════╣
-║ Contribution etiquette for Dreamteam projects.                   ║
-╚═══════════════════════════════════════════════════════════════════╝
--->
+# Contributing — org template
 
-# CONTRIBUTING.md — Org Template
-
-> Use this file for contribution guidelines: etiquette, AI-collab protocols, commit conventions.
+Per-repo `CONTRIBUTING.md` may extend this file.
 
 ---
 
-## How to Contribute
+## Process
 
-- Fork project, make changes
-- Use feature branches (`feature/[name]`)
-- **AI-assisted PRs**: Clearly mark AI involvement in PR or commits (`[AI-assist: Claude]`)
-- Document feature or fix in project [AI_ACTIVITY_LOG.md](../docs/AI_ACTIVITY_LOG.md)
-
----
-
-## Code Review & Approval
-
-- PRs must be reviewed by at least one human and one AI agent (as assigned in [../docs/ACCESS_CONTROL.md](../docs/ACCESS_CONTROL.md))
+1. Fork or branch from `main` (`feature/*`, `fix/*`, `docs/*`).
+2. Keep changes focused; match existing code style.
+3. Open PR with test plan; request review from maintainer.
+4. No secrets, client data, or credentials in commits.
 
 ---
 
-## Helpful Docs
+## AI-assisted work
 
-- [../docs/WORKFLOW.md](../docs/WORKFLOW.md)
-- [../docs/AI_ACTIVITY_LOG.md](../docs/AI_ACTIVITY_LOG.md)
-- [../docs/FAQ.md](../docs/FAQ.md)
-- [PULL_REQUEST_TEMPLATE.md](PULL_REQUEST_TEMPLATE.md)
+- Human maintainer approves all merges.
+- Optional: note AI assistance in PR description.
+- Significant private-repo sessions: see [docs/AI_ACTIVITY_LOG.md](../docs/AI_ACTIVITY_LOG.md).
 
 ---
-# Document Metadata
-version: 1.0.0
-last_updated: 2025-11-18
-last_updated_by: AI-Human Dreamteam
-next_review: 2025-12-01
-stability: stable
+
+## Standards
+
+| Area | Doc |
+|------|-----|
+| Workflow | [docs/WORKFLOW.md](../docs/WORKFLOW.md) |
+| AI sessions | [docs/AI_ORCHESTRATION.md](../docs/AI_ORCHESTRATION.md) |
+| Web / deploy | [isystem-deploy/docs](https://github.com/iSystemDevelopment/isystem-deploy/tree/main/docs) |
+| Security | [SECURITY.md](SECURITY.md) |
+
 ---
+
+## Help
+
+- [docs/FAQ.md](../docs/FAQ.md)  
+- [docs/HELP.md](../docs/HELP.md)  
+- [diodac.electronics@gmail.com](mailto:diodac.electronics@gmail.com)

@@ -1,66 +1,61 @@
-<!--
-╔═══════════════════════════════════════════════════════════════════╗
-║              🚀 AI-HUMAN DREAMTEAM ACTIVITY LOG                  ║
-╠═══════════════════════════════════════════════════════════════════╣
-║   STANDARD TEMPLATE — iSystemDevelopment ORG LEVEL               ║
-║   For projects: copy, reference, or adapt to your workflow!      ║
-╚═══════════════════════════════════════════════════════════════════╝
--->
+# AI activity log — template
 
-# AI_ACTIVITY_LOG.md — Org Standard Template
-
-> _For project repo logs, see that repo’s AI_ACTIVITY_LOG.md. Use this as a best-practice template._
+Optional but recommended for **private SSOT repos** and multi-session features.  
+Public OSS repos: use CHANGELOG + PR history instead.
 
 ---
 
-## 📝 Log Entry Format (YAML sample)
+## When to log
+
+- Multi-hour AI-assisted implementation  
+- Security-sensitive changes  
+- Client deliverables  
+- Deploy / infra changes  
+
+Skip for typo fixes and single-line patches.
+
+---
+
+## Entry format
+
 ```yaml
-- timestamp: 2025-11-18T14:45:00Z
-  ai_system: Claude
-  task_id: TASK-005
-  task_type: implementation
-  description: "Implemented invoice Sync feature"
-  files_modified:
-    - src/inventory/sync.js
-  lines_changed: 80
-  handoff_to: Gemini Ultra
-  commit_hash: abc123def
+- date: 2026-07-06
+  author: Dr. Diodac
+  assistant: Cursor Agent
+  repo: isystem-deploy
+  summary: "Data console Test History column + org docs refresh"
+  files:
+    - web/imeter.../data.html
+    - docs/web-layout-standard.md
+  deploy: "scp data.html + imeter-theme.css to VPS"
   status: completed
-  notes: "Google Sheets integration required next"
 ```
 
-## 📊 Activity Types
+Plain markdown bullets are fine if YAML feels heavy.
 
-| Type              | Example                                |
-|-------------------|----------------------------------------|
-| ideation          | New feature, user stories               |
-| implementation    | Code, test, module                      |
-| integration       | API, external service, cloud            |
-| security-review   | Vulnerability scan, auth, sanitization  |
-| documentation     | Docs, README, guide                     |
-| bugfix/refactor   | Fixes, performance, code cleanup        |
+---
 
-## 🔄 Daily Summary Template
+## Activity types
 
-```yaml
-total_completed: 3
-by_ai:
-  claude: 1
-  gemini: 1
-  chatgpt: 1
-```
+| Type | Example |
+|------|---------|
+| `plan` | Architecture note, SSOT draft |
+| `implement` | Feature or fix merged |
+| `review` | Security or code review pass |
+| `deploy` | VPS / Cloudflare / nginx |
+| `docs` | README, wiki, standards |
 
-## 🔗 Related Documents
-- [ACCESS_CONTROL.md](ACCESS_CONTROL.md)
-- [AI_ORCHESTRATION.md](AI_ORCHESTRATION.md)
+---
+
+## Project file location
+
+Create `AI_ACTIVITY_LOG.md` at repo root (private projects) or append to `CHANGELOG.md` (public).
+
+Do **not** log secrets, tokens, or client PII.
+
+---
+
+## Related
+
+- [AI_ORCHESTRATION.md](AI_ORCHESTRATION.md)  
 - [WORKFLOW.md](WORKFLOW.md)
-- [DREAMTEAM_INDEX.md](DREAMTEAM_INDEX.md)
-
----
-# Document Metadata
-version: 1.0.0
-last_updated: 2025-11-18
-last_updated_by: AI-Human Dreamteam
-next_review: 2025-12-01
-stability: stable
----

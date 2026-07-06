@@ -1,32 +1,25 @@
-<!--
-╔═══════════════════════════════════════════════════════════════════╗
-║        🚀 DREAMTEAM SLACK INTEGRATION — ORG TEMPLATE             ║
-╠═══════════════════════════════════════════════════════════════════╣
-║ Setup and best practices — copy/adapt per project!               ║
-╚═══════════════════════════════════════════════════════════════════╝
--->
+# Slack integration (optional)
 
-# SLACK_INTEGRATION.md — AI-Human Dreamteam (Org Standard)
+Slack is **optional** — not required for org workflow. Enable only if the team actively uses it.
 
 ---
-## Why Slack?
-Live notifications, team sync, and AI bot integration.
 
-## Setup
-1. Create channel (e.g., `#smart-inventory-builder`)
-2. Invite humans, add AI bots (see Slack docs)
-3. Link GitHub notifications, webhooks, AI log posts using [AI_ACTIVITY_LOG.md](AI_ACTIVITY_LOG.md) details.
-4. Ping team for urgent issues; configure security alerts for @Claude.
+## If you enable Slack
 
-## Links
-- [Slack GitHub Integration Docs](https://slack.github.com/integrations/github)
-- [Dreamteam ChatBot Setup](html/index.html)
+1. Create a private channel (e.g. `#isystem-dev`).
+2. Add [GitHub integration](https://slack.github.com/) for PR/issue notifications.
+3. Do not post secrets, credentials, or client data.
 
 ---
-# Document Metadata
-version: 1.0.0
-last_updated: 2025-11-18
-last_updated_by: AI-Human Dreamteam
-next_review: 2025-12-01
-stability: stable
+
+## Not configured by default
+
+- No org-wide Slack bot is maintained in this repo.
+- ChatBot / HTML preview links are deprecated — use GitHub Issues and email instead.
+
 ---
+
+## Related
+
+- [HELP.md](HELP.md)  
+- [ONBOARDING.md](ONBOARDING.md)
